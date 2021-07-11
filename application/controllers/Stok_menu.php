@@ -112,7 +112,7 @@ class Stok_menu extends CI_Controller
                 'id_menu' => $this->input->post('id_menu', TRUE),
                 'jumlah_stok_menu' => $this->input->post('jumlah_stok_menu', TRUE),
                 'terjual' => $this->input->post('terjual', TRUE),
-                'sisa' => $this->input->post('sisa', TRUE),
+                'sisa' => $this->input->post('jumlah_stok_menu', TRUE),
             );
 
             $this->Stok_menu_model->insert($data);
@@ -157,11 +157,15 @@ class Stok_menu extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_stok_menu', TRUE));
         } else {
+            $stok_lama = $this->input->post('jumlah_stok_menu', TRUE);
+            $stok_baru = $this->input->post('tambah_stok', TRUE);
+            $sisa = $this->input->post('sisa', TRUE);
+
             $data = array(
                 'id_menu' => $this->input->post('id_menu', TRUE),
-                'jumlah_stok_menu' => $this->input->post('jumlah_stok_menu', TRUE),
+                'jumlah_stok_menu' => $stok_lama + $stok_baru,
                 'terjual' => $this->input->post('terjual', TRUE),
-                'sisa' => $this->input->post('sisa', TRUE),
+                'sisa' => $sisa + $stok_baru,
             );
 
             $this->Stok_menu_model->update($this->input->post('id_stok_menu', TRUE), $data);

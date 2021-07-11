@@ -24,15 +24,29 @@
                                 ?>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="int">Jumlah Stok Menu <?php echo form_error('jumlah_stok_menu') ?></label>
+                            <input type="text" class="form-control" name="jumlah_stok_menu" id="jumlah_stok_menu" placeholder="Jumlah Stok Menu" value="<?php echo $jumlah_stok_menu; ?>" />
+                        </div>
                     <?php else : ?>
                         <input type="hidden" name="id_menu" value="<?php echo $id_menu; ?>" />
+                        <input type="hidden" class="form-control" name="jumlah_stok_menu" id="jumlah_stok_menu" placeholder="Jumlah Stok Menu" value="<?php echo $jumlah_stok_menu; ?>" />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" disabled value="<?php echo $jumlah_stok_menu; ?>">
+                                </div>
+                                <div class="col-md-1">+</div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" name="tambah_stok" id="tambah_stok" placeholder="Tambah Jumlah Stok Menu" />
+                                </div>
+                            </div>
+
+                        </div>
                     <?php endif; ?>
 
 
-                    <div class="form-group">
-                        <label for="int">Jumlah Stok Menu <?php echo form_error('jumlah_stok_menu') ?></label>
-                        <input type="text" class="form-control" name="jumlah_stok_menu" id="jumlah_stok_menu" placeholder="Jumlah Stok Menu" value="<?php echo $jumlah_stok_menu; ?>" />
-                    </div>
+
                     <input type="hidden" class="form-control" name="terjual" id="terjual" placeholder="Terjual" value="<?php echo $terjual; ?>" />
                     <input type="hidden" class="form-control" name="sisa" id="sisa" placeholder="Sisa" value="<?php echo $sisa; ?>" />
 

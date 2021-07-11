@@ -72,7 +72,7 @@
                                         echo ' ';
                                         echo anchor(site_url('menu_fb/update/' . $menu_fb->id_menu), ' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"');
                                         echo ' ';
-                                        echo anchor(site_url('delete/' . $menu_fb->id_menu) . '/' . $title, ' <i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'delete/' . $menu_fb->id_menu . '/' . $title . '\')"  data-toggle="tooltip" title="Delete" ');
+                                        echo anchor(site_url('delete/' . $menu_fb->id_menu) . '/' . $kat, ' <i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'delete/' . $menu_fb->id_menu . '/' . $kat . '\')"  data-toggle="tooltip" title="Delete" ');
                                         ?>
                                     <?php else : ?>
                                         <?php

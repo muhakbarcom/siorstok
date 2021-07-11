@@ -14,7 +14,7 @@
             <div class="box-body">
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-4">
-                        <?php echo anchor(site_url('transaksi/create'), '<i class="fa fa-plus"></i> Create', 'class="btn bg-purple"'); ?>
+                        <!-- <?php echo anchor(site_url('transaksi/create'), '<i class="fa fa-plus"></i> Create', 'class="btn bg-purple"'); ?> -->
                     </div>
                     <div class="col-md-4 text-center">
                         <div style="margin-top: 8px" id="message">
@@ -44,7 +44,7 @@
                 <form method="post" action="<?= site_url('transaksi/deletebulk'); ?>" id="formbulk">
                     <table class="table table-bordered" style="margin-bottom: 10px" style="width:100%">
                         <tr>
-                            <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
+                            <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
                             <th>No</th>
                             <th>Jumlah Item</th>
                             <th>Nama Konsumen</th>
@@ -53,13 +53,13 @@
                             <th>Status Transaksi</th>
                             <th>Status Pelayanan</th>
                             <th>Id User</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr><?php
                                 foreach ($transaksi_data as $transaksi) {
                                 ?>
                             <tr>
 
-                                <td style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->id_transaksi; ?>" />&nbsp;</td>
+                                <!-- <td style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->id_transaksi; ?>" />&nbsp;</td> -->
 
                                 <td width="80px"><?php echo ++$start ?></td>
                                 <td><?php echo $transaksi->jumlah_item ?></td>
@@ -69,7 +69,7 @@
                                 <td><?php echo $transaksi->status_transaksi ?></td>
                                 <td><?php echo $transaksi->status_pelayanan ?></td>
                                 <td><?php echo $transaksi->id_user ?></td>
-                                <td style="text-align:center" width="200px">
+                                <!-- <td style="text-align:center" width="200px">
                                     <?php
                                     echo anchor(site_url('transaksi/read/' . $transaksi->id_transaksi), '<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"');
                                     echo ' ';
@@ -77,7 +77,7 @@
                                     echo ' ';
                                     echo anchor(site_url('transaksi/delete/' . $transaksi->id_transaksi), ' <i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'transaksi/delete/' . $transaksi->id_transaksi . '\')"  data-toggle="tooltip" title="Delete" ');
                                     ?>
-                                </td>
+                                </td> -->
                             </tr>
                         <?php
                                 }
@@ -85,7 +85,7 @@
                     </table>
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-12">
-                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> Hapus Data Terpilih</button> <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+                            <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
                         </div>
                     </div>
                 </form>

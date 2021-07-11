@@ -302,7 +302,7 @@ class Transaksi extends CI_Controller
         // var_dump($data['total_bayar']);
         // exit;
 
-        $data['title'] = 'Pembayaran Transaksi';
+        $data['title'] = 'Transaksi Pembayaran';
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',

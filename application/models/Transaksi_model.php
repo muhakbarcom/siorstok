@@ -56,6 +56,7 @@ class Transaksi_model extends CI_Model
         // $this->db->or_like('status_pelayanan', $q);
         // $this->db->or_like('id_user', $q);
         $this->db->where('status_transaksi', 'Belum Diterima');
+        $this->db->or_where('status_transaksi', 'diterima');
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

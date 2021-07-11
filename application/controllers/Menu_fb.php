@@ -71,7 +71,7 @@ class Menu_fb extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Menu_fb_model->total_rows($q);
-        $menu_fb = $this->Menu_fb_model->get_limit_data_food($config['per_page'], $start, $q);
+        $menu_fb = $this->Menu_fb_model->get_limit_data_food_kelola($config['per_page'], $start, $q);
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -84,6 +84,7 @@ class Menu_fb extends CI_Controller
             'start' => $start,
         );
         $data['title'] = 'Kelola Menu Food and Bvrg';
+        $data['kat'] = 'Food';
         $data['subtitle'] = 'Food';
         $data['crumb'] = [
             'Menu Fb' => '',
@@ -110,7 +111,7 @@ class Menu_fb extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Menu_fb_model->total_rows($q);
-        $menu_fb = $this->Menu_fb_model->get_limit_data_beverage($config['per_page'], $start, $q);
+        $menu_fb = $this->Menu_fb_model->get_limit_data_beverage_kelola($config['per_page'], $start, $q);
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -123,6 +124,8 @@ class Menu_fb extends CI_Controller
             'start' => $start,
         );
         $data['title'] = 'Kelola Menu Food and Bvrg';
+        $data['kat'] = 'Beverage';
+
         $data['submenu'] = 1;
         $data['subtitle'] = 'Beverage';
         $data['crumb'] = [
@@ -284,7 +287,7 @@ class Menu_fb extends CI_Controller
 
             $this->Menu_fb_model->update($this->input->post('id_menu', TRUE), $data);
             $this->session->set_flashdata('success', 'Update Record Success');
-            redirect(site_url('menu_fb'));
+            redirect(site_url('menu_fb/' .  $this->input->post('kategori_menu')));
         }
     }
 

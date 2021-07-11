@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar Transaksi Masuk</h3>
+                <h3 class="box-title">Daftar Transaksi Masuk (Terima)</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
@@ -54,7 +54,7 @@
                                 <td width="80px"><?php echo ++$start ?></td>
                                 <td><?php echo $transaksi->nama_konsumen ?></td>
                                 <td>
-                                    <?php if ($transaksi->status_transaksi == NULL) : ?>
+                                    <?php if ($transaksi->status_transaksi == 'Belum Diterima') : ?>
                                         <a href="<?= base_url('transaksi/terima_kasir/' . $transaksi->id_transaksi); ?>" class="btn btn-warning">Terima</a>
                                     <?php else : ?>
                                         <a href="<?= base_url('transaksi/tampil_trx/' . $transaksi->id_transaksi); ?>" class="btn btn-info">View</a>

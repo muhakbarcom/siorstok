@@ -148,7 +148,7 @@ class Konsumen extends CI_Controller
             'nama_konsumen' => $atas_nama,
             'tanggal_transaksi' => date('Y-m-d H:i:s'),
             'total_bayar' => $total_bayar,
-            // 'status_transaksi' => NULL,
+            // 'status_transaksi' => 'Selesai',
             // 'status_pelayanan' => NULL,
             'id_user' => $apa->id,
         );
@@ -166,6 +166,7 @@ class Konsumen extends CI_Controller
                 'catatan' => $this->input->post($i . 'catatan')
             );
             $i++;
+
             $this->Detail_transaksi_model->insert($data);
             $id_menu = $items['id'];
             $rekapan = $this->db->query("select * from rekapan_stok where id_menu=$id_menu")->row();
