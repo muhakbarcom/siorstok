@@ -32,26 +32,28 @@
                               <?php echo form_input($last_name); ?>
                         </p>
 
-                        <?php
-                        if ($identity_column !== 'email') {
-                              echo '<p>';
-                              echo lang('create_user_identity_label', 'identity');
-                              echo '<br />';
-                              echo form_error('identity');
-                              echo form_input($identity);
-                              echo '</p>';
-                        }
-                        ?>
+                        <div class="form_group">
+                              <label for="">Username</label><?= form_error('identity'); ?>
+                              <input type="text" name="identity" class="form-control">
+                        </div>
+
+                        <!-- <?php
+                              if ($identity_column !== 'email') {
+                                    echo '<p>';
+                                    echo lang('create_user_identity_label', 'identity');
+                                    echo '<br />';
+                                    echo form_error('identity');
+                                    echo form_input($identity);
+                                    echo '</p>';
+                              }
+                              ?> -->
 
                         <p>
                               <?php echo lang('create_user_email_label', 'email'); ?> <br />
                               <?php echo form_input($email); ?>
                         </p>
 
-                        <p>
-                              <?php echo lang('create_user_phone_label', 'phone'); ?> <br />
-                              <?php echo form_input($phone); ?>
-                        </p>
+
                         <!-- <p>
                     <?php echo lang('create_user_nik_label', 'nik'); ?> <br />
                     <?php echo form_input($nik); ?>

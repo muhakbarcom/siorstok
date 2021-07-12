@@ -174,7 +174,7 @@ class Menu_fb extends CI_Controller
             'deskripsi' => set_value('deskripsi'),
             'kategori_menu' => set_value('kategori_menu'),
         );
-        $data['title'] = 'Menu Fb';
+        $data['title'] = 'Menu Food and Bvrg';
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',
@@ -238,7 +238,7 @@ class Menu_fb extends CI_Controller
                 'deskripsi' => set_value('deskripsi', $row->deskripsi),
                 'kategori_menu' => set_value('kategori_menu', $row->kategori_menu),
             );
-            $data['title'] = 'Menu Fb';
+            $data['title'] = 'Update Menu ';
             $data['subtitle'] = '';
             $data['crumb'] = [
                 'Dashboard' => '',

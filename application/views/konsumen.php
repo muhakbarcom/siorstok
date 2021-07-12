@@ -120,18 +120,18 @@
 <div class="slideshow-container">
 	<div class="mySlides fade">
 		<div class="numbertext">1 / 3</div>
-		<img src="<?= base_url('assets/images/background/iklan.jpg'); ?>" class="img-thumbnail">
-		<div class="text">Caption Text</div>
+		<img src="<?= base_url('assets/images/background/iklan1.png'); ?>" class="img-thumbnail">
+		<div class="text"></div>
 	</div>
 	<div class="mySlides fade">
 		<div class="numbertext">2 / 3</div>
-		<img src="<?= base_url('assets/images/background/iklan.jpg'); ?>" class="img-thumbnail">
-		<div class="text">Caption Two</div>
+		<img src="<?= base_url('assets/images/background/iklan2.png'); ?>" class="img-thumbnail">
+		<div class="text"></div>
 	</div>
 	<div class="mySlides fade">
 		<div class="numbertext">3 / 3</div>
-		<img src="<?= base_url('assets/images/background/iklan.jpg'); ?>" class="img-thumbnail">
-		<div class="text">Caption Three</div>
+		<img src="<?= base_url('assets/images/background/iklan3.png'); ?>" class="img-thumbnail">
+		<div class="text"></div>
 	</div>
 </div>
 <br>
@@ -188,6 +188,7 @@
 		</div>
 	</div>
 </div>
+<br><br>
 <div class="row mx-auto text-center">
 	<div class="col">
 		<a class="btn btn-primary" href="<?= base_url('konsumen/order'); ?>">

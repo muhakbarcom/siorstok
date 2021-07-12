@@ -34,7 +34,7 @@
         <div class="col-md-6"> <b>Total Bayar</b> <?= rupiah($this->cart->total()); ?></div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-12 text-center"><b>Atas Nama</b> <input type="text" name="atas_nama" class=""></div>
+        <div class="col-md-12 text-center"><b>Atas Nama</b> <input type="text" name="atas_nama" required></div>
     </div>
     <div class="row mt-5">
         <div class="col-md-6"></div>

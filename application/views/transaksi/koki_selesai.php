@@ -61,7 +61,11 @@
                                 }
                         ?>
                     </table>
-
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12">
+                            <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+                        </div>
+                    </div>
                 </form>
                 <div class="row">
                     <div class="col-md-6">

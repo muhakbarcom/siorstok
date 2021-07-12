@@ -36,9 +36,15 @@
                           <?php echo form_input($company); ?>
                     </div> -->
 
-        <div class="form-group">
-          <?php echo lang('edit_user_phone_label', 'phone'); ?> <br />
-          <?php echo form_input($phone); ?>
+
+
+        <div class="form_group">
+          <label for="">Email</label><?= form_error('email'); ?>
+          <?php echo form_input($email); ?>
+        </div>
+        <div class="form_group">
+          <label for="">Username</label><?= form_error('identity'); ?>
+          <?php echo form_input($identity); ?>
         </div>
 
         <div class="form-group">

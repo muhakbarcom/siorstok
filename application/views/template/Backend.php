@@ -123,26 +123,7 @@ $setting_aplikasi = $this->db->get('setting')->row();
                 <img src="<?= base_url('assets/uploads/image/profile/') . $user->image; ?>" class="user-image" alt="User Image">
                 <span class="hidden-xs"><?= "{$user->first_name} {$user->last_name}"; ?></span>
               </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="<?= base_url('assets/uploads/image/profile/') . $user->image; ?>" class="img-circle" alt="User Image">
 
-                  <p>
-                    <?= "{$user->first_name} {$user->last_name}"; ?>
-                  </p>
-                </li>
-
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="<?= base_url(); ?>profile" class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="<?= base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
-                  </div>
-                </li>
-              </ul>
             </li>
 
           </ul>

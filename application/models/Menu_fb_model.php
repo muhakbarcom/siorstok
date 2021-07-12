@@ -42,6 +42,20 @@ class Menu_fb_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    function total_menu_food()
+    {
+        $this->db->where('kategori_menu', 'Food');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+    function total_menu_beverage()
+    {
+        $this->db->where('kategori_menu', 'Beverage');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
@@ -81,6 +95,19 @@ class Menu_fb_model extends CI_Model
         limit $start,$limit
         ")->result();
         return $qry;
+    }
+
+    function total_rows_menu($q = NULL, $x)
+    {
+        $query = $this->db->query("select count(s.id_menu) as jumlah_baris from menu_food_and_beverage m
+        right join stok_menu s
+        on (m.id_menu = s.id_menu)
+        where s.sisa>0 and
+         m.kategori_menu='$x'
+        order by m.id_menu $this->order
+        ")->result();
+        return $query;
+        // return $this->db->count_all_results();
     }
 
     function get_limit_data_beverage($limit, $start = 0, $q = NULL)

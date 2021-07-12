@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-md-4 text-right"></div>
         <div class="col-md-2"> <b>Bayar(CASH)</b> </div>
-        <div class="col-md-3"> <input id="bayar" type="text" class="form-group" name="bayar" onkeyup="sum();"></div>
+        <div class="col-md-3"> <input id="bayar" type="text" class="form-group" name="bayar" onkeyup="sum();" required></div>
         <div class="col-md-3"> </div>
     </div>
     <div class="row">

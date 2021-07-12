@@ -30,7 +30,7 @@ class Konsumen extends CI_Controller
         ];
         //$this->layout->set_privilege(1);
         $data['view_menu_terbaru'] = $this->db->query("select * from view_menu_terbaru")->result_array();
-        $data['view_menu_favorit'] = $this->db->query("select * from view_menu_favorit")->result_array();
+        $data['view_menu_favorit'] = $this->db->query("select * from view_menu_favorit limit 3")->result_array();
         $data['page'] = 'Konsumen';
         $this->load->view('template/konsumen', $data);
     }
@@ -50,8 +50,12 @@ class Konsumen extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Menu_fb_model->total_rows($q);
+        $jml_baris = $this->Menu_fb_model->total_rows_menu($q, $x);
+        $config['total_rows'] = $jml_baris[0]->jumlah_baris;
+        // var_dump($config['total_rows']);
+        // exit;
         $data['title'] = 'Pemesanan Konsumen';
+
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -61,11 +65,13 @@ class Konsumen extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $data['menu'] = $this->Menu_fb_model->get_limit_data_menu($config['per_page'], $start, $q, $x);
+
+        $data['title'] = 'Order';
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',
         ];
+        $data['menu'] = $this->Menu_fb_model->get_limit_data_menu($config['per_page'], $start, $q, $x);
         //$this->layout->set_privilege(1);
         $data['page'] = 'order';
         $this->load->view('template/konsumen', $data);
@@ -192,10 +198,22 @@ class Konsumen extends CI_Controller
                 $this->Rekapan_stok_model->insert($data);
             }
         }
-
-
-
         $this->cart->destroy();
-        redirect('transaksi/masuk');
+        redirect('konsumen/konsumen_akhir');
+    }
+
+    public function konsumen_akhir()
+    {
+
+        $data['title'] = 'Pemesanan Konsumen';
+        $data['subtitle'] = '';
+        $data['crumb'] = [
+            'Dashboard' => '',
+        ];
+        //$this->layout->set_privilege(1);
+        // $data['view_menu_terbaru'] = $this->db->query("select * from view_menu_terbaru")->result_array();
+        // $data['view_menu_favorit'] = $this->db->query("select * from view_menu_favorit limit 3")->result_array();
+        $data['page'] = 'konsumen_akhir';
+        $this->load->view('template/konsumen', $data);
     }
 }

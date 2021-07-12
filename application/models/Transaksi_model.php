@@ -44,6 +44,31 @@ class Transaksi_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    function total_pesanan_masuk()
+    {
+        $this->db->where('status_transaksi', 'SELESAI');
+        $this->db->where('status_pelayanan', 'Belum Diterima');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+    function total_trx_today()
+    {
+        $tgl = date('Y-m-d');
+        $juml = $this->db->query("select count(id_transaksi) as jml from transaksi where status_transaksi='SELESAI' and substr(tanggal_transaksi, 1, 10)=$tgl")->result();
+        return $juml;
+        // $this->db->where('status_transaksi', 'SELESAI');
+        // $this->db->where(substr(tanggal_transaksi, 1, 10), date('Y-m-d'));
+        // $this->db->from($this->table);
+        // return $this->db->count_all_results();
+    }
+    function total_pesanan_selesai()
+    {
+        $this->db->where('status_transaksi', 'SELESAI');
+        $this->db->where('status_pelayanan', 'Selesai');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
@@ -72,8 +97,9 @@ class Transaksi_model extends CI_Model
         // $this->db->or_like('status_transaksi', $q);
         // // $this->db->or_like('status_pelayanan', $q);
         // $this->db->or_like('id_user', $q);
-        $this->db->where('status_pelayanan', 'Pesanan diterima');
-        $this->db->or_where('status_pelayanan', 'Belum Dimasak');
+        $this->db->where('status_transaksi', 'SELESAI');
+        $this->db->where('status_pelayanan', 'Belum Dimasak');
+        $this->db->or_where('status_pelayanan', 'Pesanan diterima');
         $this->db->or_where('status_pelayanan', 'Proses Dimasak');
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

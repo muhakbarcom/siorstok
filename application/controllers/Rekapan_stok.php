@@ -9,7 +9,7 @@ class Rekapan_stok extends CI_Controller
     {
         parent::__construct();
         $c_url = $this->router->fetch_class();
-        $this->layout->auth(); 
+        $this->layout->auth();
         $this->layout->auth_privilege($c_url);
         $this->load->model('Rekapan_stok_model');
         $this->load->library('form_validation');
@@ -19,7 +19,7 @@ class Rekapan_stok extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'rekapan_stok?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'rekapan_stok?q=' . urlencode($q);
@@ -30,21 +30,33 @@ class Rekapan_stok extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Rekapan_stok_model->total_rows($q);
-        $rekapan_stok = $this->Rekapan_stok_model->get_limit_data($config['per_page'], $start, $q);
+        // $config['total_rows'] = $this->Rekapan_stok_model->total_rows($q);
+        // $rekapan_stok = $this->Rekapan_stok_model->get_limit_data($config['per_page'], $start, $q);
+
+
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        if ($dari) {
+            $config['total_rows'] = $this->Rekapan_stok_model->laporan_stok_total($q, $dari, $sampai);
+            $view_laporan_penjualan = $this->Rekapan_stok_model->laporan_stok($config['per_page'], $start, $q, $dari, $sampai);
+        } else {
+            $config['total_rows'] = $this->Rekapan_stok_model->total_rows($q);
+            $view_laporan_penjualan = $this->Rekapan_stok_model->get_limit_data($config['per_page'], $start, $q);
+        }
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
-            'rekapan_stok_data' => $rekapan_stok,
+            'rekapan_stok_data' => $view_laporan_penjualan,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $data['title'] = 'Rekapan Stok';
-        $data['subtitle'] = '';
+        $data['title'] = 'Laporan';
+        $data['subtitle'] = 'Laporan Stok Menu';
         $data['crumb'] = [
             'Rekapan Stok' => '',
         ];
@@ -53,42 +65,42 @@ class Rekapan_stok extends CI_Controller
         $this->load->view('template/backend', $data);
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Rekapan_stok_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_rekapan_stok' => $row->id_rekapan_stok,
-		'id_menu' => $row->id_menu,
-		'tanggal_penjualan' => $row->tanggal_penjualan,
-		'stok_terjual' => $row->stok_terjual,
-		'stok_sisa' => $row->stok_sisa,
-	    );
-        $data['title'] = 'Rekapan Stok';
-        $data['subtitle'] = '';
-        $data['crumb'] = [
-            'Dashboard' => '',
-        ];
+                'id_rekapan_stok' => $row->id_rekapan_stok,
+                'id_menu' => $row->id_menu,
+                'tanggal_penjualan' => $row->tanggal_penjualan,
+                'stok_terjual' => $row->stok_terjual,
+                'stok_sisa' => $row->stok_sisa,
+            );
+            $data['title'] = 'Rekapan Stok';
+            $data['subtitle'] = '';
+            $data['crumb'] = [
+                'Dashboard' => '',
+            ];
 
-        $data['page'] = 'rekapan_stok/rekapan_stok_read';
-        $this->load->view('template/backend', $data);
+            $data['page'] = 'rekapan_stok/rekapan_stok_read';
+            $this->load->view('template/backend', $data);
         } else {
             $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('rekapan_stok'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('rekapan_stok/create_action'),
-	    'id_rekapan_stok' => set_value('id_rekapan_stok'),
-	    'id_menu' => set_value('id_menu'),
-	    'tanggal_penjualan' => set_value('tanggal_penjualan'),
-	    'stok_terjual' => set_value('stok_terjual'),
-	    'stok_sisa' => set_value('stok_sisa'),
-	);
+            'id_rekapan_stok' => set_value('id_rekapan_stok'),
+            'id_menu' => set_value('id_menu'),
+            'tanggal_penjualan' => set_value('tanggal_penjualan'),
+            'stok_terjual' => set_value('stok_terjual'),
+            'stok_sisa' => set_value('stok_sisa'),
+        );
         $data['title'] = 'Rekapan Stok';
         $data['subtitle'] = '';
         $data['crumb'] = [
@@ -98,8 +110,8 @@ class Rekapan_stok extends CI_Controller
         $data['page'] = 'rekapan_stok/rekapan_stok_form';
         $this->load->view('template/backend', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -107,19 +119,19 @@ class Rekapan_stok extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_menu' => $this->input->post('id_menu',TRUE),
-		'tanggal_penjualan' => $this->input->post('tanggal_penjualan',TRUE),
-		'stok_terjual' => $this->input->post('stok_terjual',TRUE),
-		'stok_sisa' => $this->input->post('stok_sisa',TRUE),
-	    );
+                'id_menu' => $this->input->post('id_menu', TRUE),
+                'tanggal_penjualan' => $this->input->post('tanggal_penjualan', TRUE),
+                'stok_terjual' => $this->input->post('stok_terjual', TRUE),
+                'stok_sisa' => $this->input->post('stok_sisa', TRUE),
+            );
 
             $this->Rekapan_stok_model->insert($data);
             $this->session->set_flashdata('success', 'Create Record Success');
             redirect(site_url('rekapan_stok'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Rekapan_stok_model->get_by_id($id);
 
@@ -127,27 +139,27 @@ class Rekapan_stok extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('rekapan_stok/update_action'),
-		'id_rekapan_stok' => set_value('id_rekapan_stok', $row->id_rekapan_stok),
-		'id_menu' => set_value('id_menu', $row->id_menu),
-		'tanggal_penjualan' => set_value('tanggal_penjualan', $row->tanggal_penjualan),
-		'stok_terjual' => set_value('stok_terjual', $row->stok_terjual),
-		'stok_sisa' => set_value('stok_sisa', $row->stok_sisa),
-	    );
+                'id_rekapan_stok' => set_value('id_rekapan_stok', $row->id_rekapan_stok),
+                'id_menu' => set_value('id_menu', $row->id_menu),
+                'tanggal_penjualan' => set_value('tanggal_penjualan', $row->tanggal_penjualan),
+                'stok_terjual' => set_value('stok_terjual', $row->stok_terjual),
+                'stok_sisa' => set_value('stok_sisa', $row->stok_sisa),
+            );
             $data['title'] = 'Rekapan Stok';
-        $data['subtitle'] = '';
-        $data['crumb'] = [
-            'Dashboard' => '',
-        ];
+            $data['subtitle'] = '';
+            $data['crumb'] = [
+                'Dashboard' => '',
+            ];
 
-        $data['page'] = 'rekapan_stok/rekapan_stok_form';
-        $this->load->view('template/backend', $data);
+            $data['page'] = 'rekapan_stok/rekapan_stok_form';
+            $this->load->view('template/backend', $data);
         } else {
             $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('rekapan_stok'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -155,19 +167,19 @@ class Rekapan_stok extends CI_Controller
             $this->update($this->input->post('id_rekapan_stok', TRUE));
         } else {
             $data = array(
-		'id_menu' => $this->input->post('id_menu',TRUE),
-		'tanggal_penjualan' => $this->input->post('tanggal_penjualan',TRUE),
-		'stok_terjual' => $this->input->post('stok_terjual',TRUE),
-		'stok_sisa' => $this->input->post('stok_sisa',TRUE),
-	    );
+                'id_menu' => $this->input->post('id_menu', TRUE),
+                'tanggal_penjualan' => $this->input->post('tanggal_penjualan', TRUE),
+                'stok_terjual' => $this->input->post('stok_terjual', TRUE),
+                'stok_sisa' => $this->input->post('stok_sisa', TRUE),
+            );
 
             $this->Rekapan_stok_model->update($this->input->post('id_rekapan_stok', TRUE), $data);
             $this->session->set_flashdata('success', 'Update Record Success');
             redirect(site_url('rekapan_stok'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Rekapan_stok_model->get_by_id($id);
 
@@ -181,25 +193,26 @@ class Rekapan_stok extends CI_Controller
         }
     }
 
-    public function deletebulk(){
+    public function deletebulk()
+    {
         $delete = $this->Rekapan_stok_model->deletebulk();
-        if($delete){
+        if ($delete) {
             $this->session->set_flashdata('success', 'Delete Record Success');
-        }else{
+        } else {
             $this->session->set_flashdata('error', 'Delete Record failed');
         }
         echo $delete;
     }
-   
-    public function _rules() 
-    {
-	$this->form_validation->set_rules('id_menu', 'id menu', 'trim|required');
-	$this->form_validation->set_rules('tanggal_penjualan', 'tanggal penjualan', 'trim|required');
-	$this->form_validation->set_rules('stok_terjual', 'stok terjual', 'trim|required');
-	$this->form_validation->set_rules('stok_sisa', 'stok sisa', 'trim|required');
 
-	$this->form_validation->set_rules('id_rekapan_stok', 'id_rekapan_stok', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    public function _rules()
+    {
+        $this->form_validation->set_rules('id_menu', 'id menu', 'trim|required');
+        $this->form_validation->set_rules('tanggal_penjualan', 'tanggal penjualan', 'trim|required');
+        $this->form_validation->set_rules('stok_terjual', 'stok terjual', 'trim|required');
+        $this->form_validation->set_rules('stok_sisa', 'stok sisa', 'trim|required');
+
+        $this->form_validation->set_rules('id_rekapan_stok', 'id_rekapan_stok', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -224,22 +237,22 @@ class Rekapan_stok extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Menu");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tanggal Penjualan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Stok Terjual");
-	xlsWriteLabel($tablehead, $kolomhead++, "Stok Sisa");
+        xlsWriteLabel($tablehead, $kolomhead++, "Id Menu");
+        xlsWriteLabel($tablehead, $kolomhead++, "Tanggal Penjualan");
+        xlsWriteLabel($tablehead, $kolomhead++, "Stok Terjual");
+        xlsWriteLabel($tablehead, $kolomhead++, "Stok Sisa");
 
-	foreach ($this->Rekapan_stok_model->get_all() as $data) {
+        foreach ($this->Rekapan_stok_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_menu);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_penjualan);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->stok_terjual);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->stok_sisa);
+            xlsWriteNumber($tablebody, $kolombody++, $data->id_menu);
+            xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_penjualan);
+            xlsWriteNumber($tablebody, $kolombody++, $data->stok_terjual);
+            xlsWriteNumber($tablebody, $kolombody++, $data->stok_sisa);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
@@ -256,18 +269,18 @@ class Rekapan_stok extends CI_Controller
             'rekapan_stok_data' => $this->Rekapan_stok_model->get_all(),
             'start' => 0
         );
-        
-        $this->load->view('rekapan_stok/rekapan_stok_doc',$data);
+
+        $this->load->view('rekapan_stok/rekapan_stok_doc', $data);
     }
 
-  public function printdoc(){
+    public function printdoc()
+    {
         $data = array(
             'rekapan_stok_data' => $this->Rekapan_stok_model->get_all(),
             'start' => 0
         );
         $this->load->view('rekapan_stok/rekapan_stok_print', $data);
     }
-
 }
 
 /* End of file Rekapan_stok.php */

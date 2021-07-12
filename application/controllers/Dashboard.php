@@ -8,10 +8,22 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->layout->auth();
+		$this->load->model('Transaksi_model');
+		$this->load->model('Menu_fb_model');
 	}
 
 	public function index()
 	{
+		$tgl = date('Y-m-d');
+		$jml_trx_today = $this->db->query("select count(id_transaksi) as jml from transaksi where status_transaksi='SELESAI' and substr(tanggal_transaksi,1,10) ='$tgl'")->row();
+		$jml_user = $this->db->query("select count(id) as jml from users")->row();
+
+		$data['jml_trx_today'] = $jml_trx_today->jml;
+		$data['jml_user'] = $jml_user->jml;
+		$data['jml_pesanan_masuk'] = $this->Transaksi_model->total_pesanan_masuk();
+		$data['jml_pesanan_selesai'] = $this->Transaksi_model->total_pesanan_selesai();
+		$data['jml_food'] = $this->Menu_fb_model->total_menu_food();
+		$data['jml_bvrg'] = $this->Menu_fb_model->total_menu_beverage();
 		$data['title'] = 'Dashboard';
 		$data['subtitle'] = '';
 		$data['crumb'] = [

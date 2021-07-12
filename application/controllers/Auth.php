@@ -412,7 +412,7 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
 		}
 		// $this->form_validation->set_rules('foto', 'foto', 'required');
-		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+		// $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
 		// $this->form_validation->set_rules('nik', $this->lang->line('create_user_validation_nik_label'), 'trim');
 		// $this->form_validation->set_rules('jabatan', $this->lang->line('create_user_validation_jabatan_label'), 'trim');
 		// $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
@@ -428,7 +428,7 @@ class Auth extends CI_Controller
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				// 'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone'),
+				// 'phone' => $this->input->post('phone'),
 				// 'nik' => $this->input->post('nik'),
 				// 'jabatan' => $this->input->post('jabatan'),
 				// 'foto' => $this->input->post('foto'),
@@ -487,13 +487,13 @@ class Auth extends CI_Controller
 			// 	'value' => $this->form_validation->set_value('company'),
 			// 	'class' => 'form-control'
 			// );
-			$this->data['phone'] = array(
-				'name' => 'phone',
-				'id' => 'phone',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone'),
-				'class' => 'form-control'
-			);
+			// $this->data['phone'] = array(
+			// 	'name' => 'phone',
+			// 	'id' => 'phone',
+			// 	'type' => 'text',
+			// 	'value' => $this->form_validation->set_value('phone'),
+			// 	'class' => 'form-control'
+			// );
 			// $this->data['nik'] = array(
 			// 	'name' => 'nik',
 			// 	'id' => 'nik',
@@ -690,7 +690,7 @@ class Auth extends CI_Controller
 		// validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
+		// $this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
 		// $this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim|required');
 
 		if (isset($_POST) && !empty($_POST)) {
@@ -708,8 +708,8 @@ class Auth extends CI_Controller
 				$data = array(
 					'first_name' => $this->input->post('first_name'),
 					'last_name' => $this->input->post('last_name'),
-					// 'company' => $this->input->post('company'),
-					'phone' => $this->input->post('phone'),
+					'email' => $this->input->post('email'),
+					'username' => $this->input->post('identity'),
 				);
 
 				// update the password if it was posted
@@ -772,18 +772,18 @@ class Auth extends CI_Controller
 			'class' => 'form-control'
 
 		);
-		// $this->data['company'] = array(
-		// 	'name'  => 'company',
-		// 	'id'    => 'company',
-		// 	'type'  => 'text',
-		// 	// 'value' => $this->form_validation->set_value('company', $user->company),
-		// 	'class' => 'form-control'
-		// );
-		$this->data['phone'] = array(
-			'name'  => 'phone',
-			'id'    => 'phone',
+		$this->data['email'] = array(
+			'name'  => 'email',
+			'id'    => 'email',
 			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone', $user->phone),
+			'value' => $this->form_validation->set_value('email', $user->email),
+			'class' => 'form-control'
+		);
+		$this->data['identity'] = array(
+			'name'  => 'identity',
+			'id'    => 'identity',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('identity', $user->username),
 			'class' => 'form-control'
 		);
 		$this->data['password'] = array(

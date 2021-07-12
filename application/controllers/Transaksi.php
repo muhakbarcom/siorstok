@@ -372,6 +372,7 @@ class Transaksi extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Transaksi_model->total_rows($q);
+
         $transaksi = $this->Transaksi_model->get_limit_data_koki($config['per_page'], $start, $q);
 
         $this->load->library('pagination');
