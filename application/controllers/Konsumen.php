@@ -175,11 +175,14 @@ class Konsumen extends CI_Controller
 
             $this->Detail_transaksi_model->insert($data);
             $id_menu = $items['id'];
-            $rekapan = $this->db->query("select * from rekapan_stok where id_menu=$id_menu")->row();
+            $hari_ini = date('Y-m-d');
+            $rekapan = $this->db->query("select * from rekapan_stok where id_menu=$id_menu and tanggal_penjualan='$hari_ini'")->row();
             $stok_menu = $this->db->query("select * from stok_menu where id_menu=$id_menu")->row();
+            $nama_menu = $this->db->query("select * from menu_food_and_beverage where id_menu=$id_menu")->row();
             if ($rekapan) {
                 $data = array(
                     'id_menu' => $stok_menu->id_menu,
+                    'nama_menu' => $nama_menu->nama_menu,
                     'tanggal_penjualan' => date('Y-m-d'),
                     'stok_terjual' => $stok_menu->terjual,
                     'stok_sisa' => $stok_menu->sisa,
@@ -191,6 +194,7 @@ class Konsumen extends CI_Controller
             } else {
                 $data = array(
                     'id_menu' => $stok_menu->id_menu,
+                    'nama_menu' => $nama_menu->nama_menu,
                     'tanggal_penjualan' => date('Y-m-d'),
                     'stok_terjual' => $stok_menu->terjual,
                     'stok_sisa' => $stok_menu->sisa,

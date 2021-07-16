@@ -188,38 +188,46 @@ class Menu_fb extends CI_Controller
     {
         $this->_rules();
         $data['menu_fb'] = $this->Menu_fb_model->get_by_id($this->input->post('id_menu', TRUE));
+        $nama_menu =  $this->input->post('nama_menu', TRUE);
+        $status_menu = $this->db->query("select count(nama_menu) as jml_menu from menu_food_and_beverage where nama_menu='$nama_menu' ")->row();
+        $status_menu = $status_menu->jml_menu;
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($status_menu > 0) {
+            $this->session->set_flashdata('error', 'Menu Sudah Ada');
             $this->create();
         } else {
-            $gambar = $_FILES['gambar'];
-            if ($gambar == '') {
+            if ($this->form_validation->run() == FALSE) {
+                $this->create();
             } else {
-                $config['upload_path'] = './assets/uploads/image/menu/';
-                $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size']     = '2048';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('gambar')) {
-
-                    $gambar = $this->upload->data('file_name');
+                $gambar = $_FILES['gambar'];
+                if ($gambar == '') {
                 } else {
-                    $this->session->set_flashdata('error', $this->upload->display_errors());
-                    redirect('menu_fb');
-                }
-            }
-            $data = array(
-                'nama_menu' => $this->input->post('nama_menu', TRUE),
-                'harga_menu' => $this->input->post('harga_menu', TRUE),
-                'gambar' => $gambar,
-                'deskripsi' => $this->input->post('deskripsi', TRUE),
-                'kategori_menu' => $this->input->post('kategori_menu', TRUE),
-            );
+                    $config['upload_path'] = './assets/uploads/image/menu/';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                    $config['max_size']     = '2048';
 
-            $this->Menu_fb_model->insert($data);
-            $this->session->set_flashdata('success', 'Create Record Success');
-            redirect(site_url('menu_fb/' .  $this->input->post('kategori_menu')));
+                    $this->load->library('upload', $config);
+
+                    if ($this->upload->do_upload('gambar')) {
+
+                        $gambar = $this->upload->data('file_name');
+                    } else {
+                        $this->session->set_flashdata('error', $this->upload->display_errors());
+                        redirect('menu_fb');
+                    }
+                }
+                $data = array(
+                    'nama_menu' => $this->input->post('nama_menu', TRUE),
+                    'harga_menu' => $this->input->post('harga_menu', TRUE),
+                    'gambar' => $gambar,
+                    'deskripsi' => $this->input->post('deskripsi', TRUE),
+                    'kategori_menu' => $this->input->post('kategori_menu', TRUE),
+                );
+
+                $this->Menu_fb_model->insert($data);
+                $this->session->set_flashdata('success', 'Create Record Success');
+                redirect(site_url('menu_fb/' .  $this->input->post('kategori_menu')));
+            }
         }
     }
 

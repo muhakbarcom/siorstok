@@ -5,7 +5,7 @@
                 <!-- <th>Gambar</th> -->
                 <th>Nama Menu</th>
                 <th>Harga</th>
-                <th>Item</th>
+                <th>Qty</th>
                 <th>Sub Total</th>
                 <th>Catatan</th>
             </tr>
@@ -30,7 +30,11 @@
         </tbody>
     </table>
     <div class="row">
-        <div class="col-md-6 text-right"><b> Total item </b> <?= $this->cart->total_items(); ?></div>
+        <?php $jumlah_menu_item = count($this->cart->contents()); ?>
+        <div class="col-md-6 text-right"><b> Total Item </b><?= $jumlah_menu_item; ?>
+            <b> Total Quantity </b> <?= $this->cart->total_items(); ?>
+        </div>
+
         <div class="col-md-6"> <b>Total Bayar</b> <?= rupiah($this->cart->total()); ?></div>
     </div>
     <div class="row mt-3">

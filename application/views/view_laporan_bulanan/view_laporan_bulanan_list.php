@@ -73,9 +73,11 @@
                             <th>Bulan Transaksi</th>
                             <th>Jumlah Item Terjual</th>
                             <th>Total Pendapatan</th>
+                            <?php $total_keseluruhan = 0; ?>
                             <!-- <th>Action</th> -->
                         </tr><?php
                                 foreach ($view_laporan_bulanan_data as $view_laporan_bulanan) {
+                                    $total_keseluruhan = $total_keseluruhan + $view_laporan_bulanan->total_pendapatan;
                                 ?>
                             <tr>
                                 <td width="80px"><?php echo ++$start ?></td>
@@ -88,8 +90,11 @@
                         ?>
                     </table>
                     <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+                        </div>
+                        <div class="col-md-3">
+                            Total Keseluruhan : <?= rupiah($total_keseluruhan); ?>
                         </div>
                     </div>
                 </form>

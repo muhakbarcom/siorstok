@@ -56,8 +56,8 @@ class Rekapan_stok_model extends CI_Model
     function laporan_stok_total($q = NULL, $dari, $sampai)
     {
         // 
-        $this->db->where('tanggal_transaksi >=', $dari);
-        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->where('tanggal_penjualan >=', $dari);
+        $this->db->where('tanggal_penjualan <=', $sampai);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -71,8 +71,8 @@ class Rekapan_stok_model extends CI_Model
         // $this->db->or_like('tanggal_penjualan', $q);
         // $this->db->or_like('stok_terjual', $q);
         // $this->db->or_like('stok_sisa', $q);
-        $this->db->where('tanggal_transaksi >=', $dari);
-        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->where('tanggal_penjualan >=', $dari);
+        $this->db->where('tanggal_penjualan <=', $sampai);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

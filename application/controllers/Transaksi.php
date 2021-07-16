@@ -318,7 +318,6 @@ class Transaksi extends CI_Controller
         $data = array(
 
             'status_transaksi' => 'SELESAI',
-            'status_pelayanan' => 'Belum Dimasak',
             'bayar' => $this->input->post('bayar', TRUE),
             'kembalian' => $this->input->post('kembalian', TRUE),
         );

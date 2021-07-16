@@ -70,14 +70,13 @@
                             <th>Nama Konsumen</th>
                             <th>Jumlah Item</th>
                             <th>Total Bayar</th>
+                            <?php $total_keseluruhan = 0; ?>
                             <!-- <th>Action</th> -->
                         </tr><?php
                                 foreach ($view_laporan_penjualan_data as $view_laporan_penjualan) {
+                                    $total_keseluruhan = $total_keseluruhan + $view_laporan_penjualan->total_bayar;
                                 ?>
                             <tr>
-
-
-
                                 <td width="80px"><?php echo ++$start ?></td>
                                 <td><?php echo tanggal_transaksi($view_laporan_penjualan->tanggal_transaksi) ?></td>
                                 <td><?php echo $view_laporan_penjualan->kode_nota ?></td>
@@ -91,8 +90,11 @@
                         ?>
                     </table>
                     <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+                        </div>
+                        <div class="col-md-3">
+                            Total Keseluruhan : <?= rupiah($total_keseluruhan); ?>
                         </div>
                     </div>
                 </form>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jul 2021 pada 18.16
+-- Waktu pembuatan: 16 Jul 2021 pada 16.18
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -110,7 +110,51 @@ INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_menu`
 (67, 40, 36, 2, 30000, '2021-07-12 21:13:12', 'sedang'),
 (68, 41, 8, 1, 15000, '2021-07-12 21:14:18', 'pedas'),
 (69, 41, 42, 3, 15000, '2021-07-12 21:14:18', ''),
-(70, 41, 41, 1, 5000, '2021-07-12 21:14:18', '');
+(70, 41, 41, 1, 5000, '2021-07-12 21:14:18', ''),
+(71, 42, 40, 3, 60000, '2021-07-13 11:15:22', 'jangan terlalu manis'),
+(72, 42, 45, 2, 30000, '2021-07-13 11:15:22', ''),
+(73, 43, 48, 3, 60000, '2021-07-13 11:45:08', ''),
+(74, 43, 43, 1, 15000, '2021-07-13 11:45:08', ''),
+(75, 43, 40, 1, 20000, '2021-07-13 11:45:08', ''),
+(76, 43, 45, 1, 15000, '2021-07-13 11:45:08', ''),
+(77, 44, 48, 1, 20000, '2021-07-13 14:25:52', ''),
+(78, 44, 47, 1, 15000, '2021-07-13 14:25:52', ''),
+(79, 45, 51, 4, 60000, '2021-07-14 10:56:14', ''),
+(80, 45, 43, 1, 15000, '2021-07-14 10:56:14', ''),
+(81, 46, 51, 4, 60000, '2021-07-14 12:00:47', ''),
+(82, 47, 36, 4, 60000, '2021-07-14 12:08:15', 'Tidak usah telur'),
+(83, 48, 36, 4, 60000, '2021-07-14 12:10:56', 'Tidak usah telur'),
+(84, 49, 36, 1, 15000, '2021-07-14 12:59:11', ''),
+(85, 50, 36, 100, 1500000, '2021-07-14 13:05:39', ''),
+(86, 51, 36, 11, 165000, '2021-07-14 13:16:56', ''),
+(87, 52, 36, 78, 1170000, '2021-07-14 13:21:56', ''),
+(88, 53, 36, 1, 15000, '2021-07-14 13:38:43', ''),
+(89, 54, 36, 1, 15000, '2021-07-14 13:42:19', ''),
+(90, 55, 36, 1, 15000, '2021-07-14 13:44:25', ''),
+(91, 56, 51, 1, 15000, '2021-07-14 14:55:56', ''),
+(92, 57, 41, 3, 15000, '2021-07-14 15:03:48', ''),
+(93, 58, 47, 1, 15000, '2021-07-14 15:06:56', ''),
+(94, 59, 46, 1, 5000, '2021-07-14 15:08:17', ''),
+(95, 60, 47, 3, 45000, '2021-07-14 22:57:52', ''),
+(96, 60, 45, 5, 75000, '2021-07-14 22:57:52', ''),
+(97, 60, 43, 4, 60000, '2021-07-14 22:57:52', ''),
+(98, 60, 49, 3, 45000, '2021-07-14 22:57:52', ''),
+(99, 60, 28, 3, 45000, '2021-07-14 22:57:52', ''),
+(100, 61, 11, 3, 45000, '2021-07-15 01:42:39', ''),
+(101, 61, 40, 3, 60000, '2021-07-15 01:42:39', ''),
+(102, 62, 51, 1, 15000, '2021-07-15 11:30:16', ''),
+(103, 62, 47, 1, 15000, '2021-07-15 11:30:16', ''),
+(104, 62, 46, 1, 5000, '2021-07-15 11:30:16', ''),
+(105, 62, 45, 1, 15000, '2021-07-15 11:30:16', ''),
+(106, 63, 41, 1, 5000, '2021-07-15 11:46:05', ''),
+(107, 63, 46, 1, 5000, '2021-07-15 11:46:05', ''),
+(108, 64, 51, 1, 15000, '2021-07-15 11:50:33', ''),
+(109, 64, 45, 1, 15000, '2021-07-15 11:50:33', ''),
+(110, 64, 43, 1, 15000, '2021-07-15 11:50:33', ''),
+(111, 65, 45, 3, 45000, '2021-07-15 23:01:01', ''),
+(112, 65, 43, 1, 15000, '2021-07-15 23:01:01', ''),
+(113, 66, 8, 3, 45000, '2021-07-16 21:15:29', 'Mienya setengah matang'),
+(114, 66, 51, 1, 15000, '2021-07-16 21:15:29', '');
 
 --
 -- Trigger `detail_transaksi`
@@ -291,29 +335,36 @@ CREATE TABLE `menu_food_and_beverage` (
 --
 
 INSERT INTO `menu_food_and_beverage` (`id_menu`, `nama_menu`, `harga_menu`, `gambar`, `deskripsi`, `kategori_menu`) VALUES
-(2, 'Expresso', 15000, 'mnn.png', 'Tersedia', 'Beverage'),
-(4, 'Indomie Kornet', 15000, 'ttt3.png', 'Tersedia', 'Food'),
-(5, 'Cireng', 15000, 'ttt4.png', 'Tersedia', 'Food'),
-(6, 'Baci', 15000, 'ttt5.png', 'Tersedia', 'Food'),
-(7, 'Bakso', 15000, 'ttt6.png', 'Tersedia', 'Food'),
-(8, 'Mie Goreng', 15000, 'ttt7.png', 'Tersedia', 'Food'),
-(9, 'Mie Rebus', 15000, 'ttt8.png', 'Tersedia', 'Food'),
-(11, 'Mie Rebus  Telur', 15000, 'ttt10.png', 'Tersedia', 'Food'),
-(28, 'Lemon tea', 15000, 'mnn16.png', 'Tersedia', 'Beverage'),
-(29, 'Coffee Late', 15000, 'mnn15.png', 'Tersedia', 'Beverage'),
-(34, 'Teh Manis', 3500, 'mnn13.png', 'Tersedia', 'Beverage'),
-(35, 'Milo', 8000, 'mnn14.png', 'Tersedia', 'Beverage'),
-(36, 'Siomay', 15000, 'ttt21.png', 'Tersedia', 'Food'),
-(37, 'Batagor', 15000, 'ttt22.png', 'Tersedia', 'Food'),
-(39, 'Kopi Susu', 15000, 'mnn18.png', 'Tersedia', 'Beverage'),
-(40, 'Vanilla Greentea', 20000, 'mnn19.png', 'Tersedia', 'Beverage'),
-(41, 'Cilok', 5000, 'ttt23.png', 'Tersedia', 'Food'),
-(42, 'Kroket', 5000, 'ttt24.png', 'Tersedia', 'Food'),
+(2, 'Expresso', 15000, 'menu_(2).jpg', 'Tersedia', 'Beverage'),
+(4, 'Indomie Kornet', 15000, 'gambar_(9).jpg', 'Tersedia', 'Food'),
+(5, 'Cireng', 15000, 'gambar_(6).jpg', 'Tersedia', 'Food'),
+(6, 'Baci', 15000, 'menu_(9).jpg', 'Tersedia', 'Food'),
+(7, 'Bakso', 15000, 'gambar_(5).jpg', 'Tersedia', 'Food'),
+(8, 'Mie Goreng', 15000, 'menu_(10).jpg', 'Tersedia', 'Food'),
+(9, 'Mie Rebus', 15000, 'Mie_Kuah.jpg', 'Tersedia', 'Food'),
+(11, 'Mie Rebus  Telur', 15000, 'r.jpg', 'Tersedia', 'Food'),
+(28, 'Lemon tea', 15000, 'menu_(3).jpg', 'Tersedia', 'Beverage'),
+(29, 'Coffee Late', 15000, 'menu_(4).jpg', 'Tersedia', 'Beverage'),
+(34, 'Teh Manis', 3500, 'menu_(5).jpg', 'Tersedia', 'Beverage'),
+(35, 'Milo', 8000, 'menu_(6).jpg', 'Tersedia', 'Beverage'),
+(36, 'Siomay', 15000, 'gambar_(11).jpg', 'Tersedia', 'Food'),
+(37, 'Batagor', 15000, 'gambar_(12).jpg', 'Tersedia', 'Food'),
+(39, 'Kopi Susu', 15000, 'menu_(7).jpg', 'Tersedia', 'Beverage'),
+(40, 'Vanilla Greentea', 20000, 'menu_(8).jpg', 'Tersedia', 'Beverage'),
+(41, 'Cilok', 5000, 'gambar_(13).jpg', 'Tersedia', 'Food'),
+(42, 'Kroket', 5000, 'gambar_(3).jpg', 'Tersedia', 'Food'),
 (43, 'Pangsit', 15000, 'gambar_(1).jpg', 'Tersedia', 'Food'),
-(44, 'Emping', 15000, 'ttt26.png', 'Tersedia', 'Food'),
-(45, 'lagsana', 15000, 'ttt27.png', 'Tersedia', 'Food'),
-(46, 'Mlinjo', 5000, 'ttt28.png', 'Tersedia', 'Food'),
-(47, 'Macaroni', 15000, 'ttt29.png', 'Tersedia', 'Food');
+(45, 'lasagna', 15000, 'makanan_(1).jpg', 'Tersedia', 'Food'),
+(46, 'Mlinjo', 5000, 'makanan_(2).jpg', 'Tersedia', 'Food'),
+(47, 'Makaroni', 15000, 'makanan_(3).jpg', 'Tersedia', 'Food'),
+(49, 'Red Velvet', 15000, 'menu_(11).jpg', 'Tersedia', 'Beverage'),
+(51, 'Choco Cookies', 15000, 'menu1.jpg', 'Tersedia', 'Food'),
+(52, 'Choco Kookies', 20000, 'menu_(6)1.jpg', 'Tersedia', 'Beverage'),
+(53, 'Makaroni', 25000, 'gambar_(3)1.jpg', 'Tersedia', 'Food'),
+(54, 'Makaroni', 20000, 'menu_(8)1.jpg', 'Tersedia', 'Food'),
+(55, 'Makaroni', 15000, 'indomie_rebus.jpg', 'Tersedia', 'Food'),
+(56, 'Makaroni', 15000, 'makanan_(2)1.jpg', 'Tersedia', 'Food'),
+(57, 'Makaroni', 23, 'indomie_rebus1.jpg', 'Tersedia', 'Food');
 
 --
 -- Trigger `menu_food_and_beverage`
@@ -354,6 +405,7 @@ INSERT INTO `menu_type` (`id_menu_type`, `type`) VALUES
 CREATE TABLE `rekapan_stok` (
   `id_rekapan_stok` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
+  `nama_menu` varchar(100) NOT NULL,
   `tanggal_penjualan` date NOT NULL,
   `stok_terjual` int(11) NOT NULL,
   `stok_sisa` int(11) NOT NULL
@@ -363,26 +415,23 @@ CREATE TABLE `rekapan_stok` (
 -- Dumping data untuk tabel `rekapan_stok`
 --
 
-INSERT INTO `rekapan_stok` (`id_rekapan_stok`, `id_menu`, `tanggal_penjualan`, `stok_terjual`, `stok_sisa`) VALUES
-(1, 6, '2021-07-08', 10, 0),
-(2, 28, '2021-06-01', 7, 3),
-(3, 27, '2021-07-08', 20, 10),
-(4, 29, '2021-07-10', 9, 21),
-(5, 5, '2021-07-10', 7, 299993),
-(6, 9, '2021-07-10', 4, 46),
-(7, 3, '2021-07-10', 3, 12),
-(8, 11, '2021-07-11', 2, 298),
-(9, 35, '2021-07-11', 3, 297),
-(10, 7, '2021-07-11', 6, 294),
-(11, 43, '2021-07-11', 4, 296),
-(12, 4, '2021-07-11', 1, 599),
-(13, 34, '2021-07-11', 1, 299),
-(14, 42, '2021-07-11', 1, 299),
-(15, 8, '2021-07-12', 5, 295),
-(16, 41, '2021-07-12', 4, 296),
-(17, 39, '2021-07-12', 2, 298),
-(18, 37, '2021-07-12', 3, 297),
-(19, 36, '2021-07-12', 2, 298);
+INSERT INTO `rekapan_stok` (`id_rekapan_stok`, `id_menu`, `nama_menu`, `tanggal_penjualan`, `stok_terjual`, `stok_sisa`) VALUES
+(31, 46, 'Mlinjo', '2021-07-14', 1, 299),
+(32, 47, 'Makaroni', '2021-07-14', 5, 295),
+(33, 45, 'lasagna', '2021-07-14', 8, 292),
+(34, 43, 'Pangsit', '2021-07-14', 10, 290),
+(35, 49, 'Red Velvet', '2021-07-14', 3, 317),
+(36, 28, 'Lemon tea', '2021-07-14', 4, 296),
+(37, 11, 'Mie Rebus  Telur', '2021-07-15', 5, 295),
+(38, 40, 'Vanilla Greentea', '2021-07-15', 7, 303),
+(39, 51, 'Choco Cookies', '2021-07-15', 11, 289),
+(40, 47, 'Makaroni', '2021-07-15', 6, 294),
+(41, 46, 'Mlinjo', '2021-07-15', 3, 297),
+(42, 45, 'lasagna', '2021-07-15', 13, 287),
+(43, 41, 'Cilok', '2021-07-15', 8, 292),
+(44, 43, 'Pangsit', '2021-07-15', 12, 288),
+(45, 8, 'Mie Goreng', '2021-07-16', 8, 292),
+(46, 51, 'Choco Cookies', '2021-07-16', 12, 288);
 
 -- --------------------------------------------------------
 
@@ -428,20 +477,26 @@ INSERT INTO `stok_menu` (`id_stok_menu`, `id_menu`, `jumlah_stok_menu`, `terjual
 (17, 5, 300, 6, 294),
 (18, 6, 300, 4, 296),
 (19, 7, 300, 6, 294),
-(20, 8, 300, 5, 295),
+(20, 8, 300, 8, 292),
 (21, 9, 300, 4, 296),
-(22, 11, 300, 2, 298),
+(22, 11, 300, 5, 295),
 (23, 35, 300, 3, 297),
-(24, 28, 300, 1, 299),
+(24, 28, 300, 4, 296),
 (25, 29, 300, 1, 299),
 (26, 34, 300, 1, 299),
-(28, 36, 300, 2, 298),
+(28, 36, 300, 203, 97),
 (29, 37, 300, 3, 297),
-(30, 39, 300, 2, 298),
-(31, 40, 300, 0, 300),
-(32, 41, 300, 4, 296),
+(30, 39, 350, 2, 348),
+(31, 40, 310, 7, 303),
+(32, 41, 300, 8, 292),
 (33, 42, 300, 8, 292),
-(34, 43, 300, 4, 296);
+(34, 43, 300, 12, 288),
+(36, 45, 300, 13, 287),
+(37, 46, 300, 3, 297),
+(38, 47, 300, 6, 294),
+(40, 49, 320, 3, 317),
+(41, 51, 300, 12, 288),
+(42, 52, 370, 0, 370);
 
 -- --------------------------------------------------------
 
@@ -456,7 +511,7 @@ CREATE TABLE `transaksi` (
   `jumlah_item` int(11) NOT NULL,
   `tanggal_transaksi` datetime NOT NULL,
   `status_transaksi` varchar(50) DEFAULT 'Belum Diterima',
-  `status_pelayanan` varchar(50) DEFAULT 'Belum dimasak',
+  `status_pelayanan` varchar(50) DEFAULT 'Pesanan diterima',
   `total_bayar` int(11) NOT NULL,
   `bayar` int(11) NOT NULL,
   `kembalian` int(11) NOT NULL
@@ -496,18 +551,43 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `nama_konsumen`, `jumlah_ite
 (27, 13, 'NAZZILLA Putri', 7, '2021-07-10 23:13:13', 'SELESAI', 'Selesai', 105000, 120000, 15000),
 (28, 2, 'Anisa', 5, '2021-07-11 01:17:23', 'SELESAI', 'Selesai', 75000, 150000, 75000),
 (29, 2, 'Sarah', 5, '2021-07-11 16:04:27', 'SELESAI', 'Selesai', 54000, 60000, 6000),
-(30, 2, 'Lutfi', 7, '2021-07-11 16:07:27', 'Belum Diterima', 'Belum dimasak', 105000, 0, 0),
+(30, 2, 'Lutfi', 7, '2021-07-11 16:07:27', 'SELESAI', 'Selesai', 105000, 120000, 15000),
 (31, 2, 'Bilal', 5, '2021-07-11 17:01:23', 'SELESAI', 'Selesai', 75000, 100000, 25000),
-(32, 2, 'Riri', 3, '2021-07-11 17:10:21', 'Belum Diterima', 'Belum dimasak', 45000, 0, 0),
+(32, 2, 'Riri', 3, '2021-07-11 17:10:21', 'SELESAI', 'Selesai', 45000, 50000, 5000),
 (33, 12, 'Nazzilla', 6, '2021-07-11 20:21:19', 'SELESAI', 'Selesai', 78500, 100000, 21500),
 (34, 2, 'Shabira', 2, '2021-07-11 20:41:57', 'SELESAI', 'Selesai', 20000, 0, 0),
-(35, 2, 'Aditya', 2, '2021-07-11 22:51:53', 'SELESAI', 'Belum Dimasak', 30000, 100000, 70000),
-(36, 12, 'Nazzilla Auliya', 3, '2021-07-12 18:13:56', 'SELESAI', 'Belum Dimasak', 45000, 50000, 5000),
-(37, 2, 'Aqila', 6, '2021-07-12 18:16:38', 'SELESAI', 'Belum Dimasak', 80000, 120000, 40000),
-(38, 2, '', 8, '2021-07-12 21:06:34', 'SELESAI', 'Belum Dimasak', 60000, 100000, 40000),
-(39, 2, '', 0, '2021-07-12 21:08:34', 'Belum Diterima', 'Belum dimasak', 0, 0, 0),
-(40, 2, 'nazzill', 5, '2021-07-12 21:13:12', 'Belum Diterima', 'Belum dimasak', 75000, 0, 0),
-(41, 2, 'NAZZILLA1', 5, '2021-07-12 21:14:18', 'Belum Diterima', 'Belum dimasak', 35000, 0, 0);
+(35, 2, 'Aditya', 2, '2021-07-11 22:51:53', 'SELESAI', 'Selesai', 30000, 100000, 70000),
+(36, 12, 'Nazzilla Auliya', 3, '2021-07-12 18:13:56', 'SELESAI', 'Selesai', 45000, 50000, 5000),
+(37, 2, 'Aqila', 6, '2021-07-12 18:16:38', 'SELESAI', 'Selesai', 80000, 120000, 40000),
+(38, 2, '', 8, '2021-04-12 21:06:34', 'SELESAI', 'Selesai', 60000, 100000, 40000),
+(39, 2, '', 9, '2021-05-12 21:08:34', 'SELESAI', 'Selesai', 0, 0, 0),
+(40, 2, 'nazzill', 5, '2021-05-12 21:13:12', 'SELESAI', 'Selesai', 75000, 0, 0),
+(41, 2, 'NAZZILLA1', 5, '2021-06-01 21:14:18', 'SELESAI', 'Selesai', 35000, 0, 0),
+(42, 12, 'Azzahra', 5, '2021-07-13 11:15:22', 'SELESAI', 'Selesai', 90000, 100000, 10000),
+(43, 13, 'Fitriani', 6, '2021-07-13 11:45:08', 'SELESAI', 'Selesai', 110000, 120000, 10000),
+(44, 14, 'Rianti', 2, '2021-07-13 14:25:52', 'SELESAI', 'Selesai', 35000, 120000, 85000),
+(45, 13, 'Tata', 5, '2021-07-14 10:56:14', 'SELESAI', 'Selesai', 75000, 80000, 5000),
+(46, 2, 'Yanti', 4, '2021-07-14 12:00:47', 'SELESAI', 'Selesai', 60000, 56000, -4000),
+(47, 2, 'Adit', 4, '2021-07-14 12:08:15', 'SELESAI', 'Selesai', 60000, 100000, 40000),
+(48, 2, 'azizah', 4, '2021-07-14 12:10:56', 'SELESAI', 'Selesai', 60000, 120000, 60000),
+(49, 2, 'asdf', 1, '2021-07-14 12:59:11', 'SELESAI', 'Selesai', 15000, 100000, 85000),
+(50, 2, 'asd', 100, '2021-07-14 13:05:39', 'SELESAI', 'Selesai', 1500000, 1600000, 100000),
+(51, 2, 'siapa', 11, '2021-07-14 13:16:56', 'SELESAI', 'Selesai', 165000, 1000000, 835000),
+(52, 2, 'titi', 78, '2021-07-14 13:21:56', 'SELESAI', 'Selesai', 1170000, 2147483647, 2147483647),
+(53, 2, 'Rita', 1, '2021-07-14 13:38:43', 'SELESAI', 'Selesai', 15000, 100000, 85000),
+(54, 2, 'tita', 1, '2021-07-14 13:42:19', 'SELESAI', 'Selesai', 15000, 100000, 85000),
+(55, 2, 'tita', 1, '2021-07-14 13:44:25', 'SELESAI', 'Selesai', 15000, 20000, 5000),
+(56, 2, 'Anya', 1, '2021-07-14 14:55:56', 'SELESAI', 'Selesai', 15000, 100000, 85000),
+(57, 2, 'riris', 3, '2021-07-14 15:03:48', 'SELESAI', 'Selesai', 15000, 100000, 85000),
+(58, 13, 'akbar', 1, '2021-07-14 15:06:56', 'SELESAI', 'Selesai', 15000, 120000, 105000),
+(59, 2, 'akbar', 1, '2021-07-14 15:08:17', 'SELESAI', 'Selesai', 5000, 100000, 95000),
+(60, 2, 'Farah', 18, '2021-07-14 22:57:52', 'SELESAI', 'Selesai', 270000, 300000, 30000),
+(61, 2, 'syifa', 6, '2021-07-15 01:42:39', 'SELESAI', 'Pesanan diterima', 105000, 120000, 15000),
+(62, 2, 'cica', 4, '2021-07-15 11:30:16', 'SELESAI', 'Pesanan diterima', 50000, 120000, 70000),
+(63, 2, 'gaga', 2, '2021-07-15 11:46:05', 'SELESAI', 'Pesanan diterima', 10000, 120000, 110000),
+(64, 2, 'taras', 3, '2021-07-15 11:50:33', 'SELESAI', 'Pesanan diterima', 45000, 50000, 5000),
+(65, 2, 'tipal', 4, '2021-07-15 23:01:01', 'diterima', 'Pesanan diterima', 60000, 0, 0),
+(66, 2, 'Ilsyah', 4, '2021-07-16 21:15:29', 'diterima', 'Pesanan diterima', 60000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -534,7 +614,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `active`, `first_nam
 (2, 'kasir', '$2y$08$LUzQbkQWNLUEEemkyjPSj.VXzKOR3QsSQ8s0R3WfpLKk6kUU.4YZi', 'kasir@gmail.com', 1, 'Kasir', '01', 'iconfinder_General_Office_37_25308161.png'),
 (12, 'operator', '$2y$08$aYyTwtIXFh77Nq/.QsrYAuVBzwhvt/jIUx0KiiFZHGTzgTsSv3A.2', 'operator@gmail.com', 1, 'Operator', '01', 'iconfinder_General_Office_37_25308162.png'),
 (13, 'koki', '$2y$08$y4yUCASegeQwVtRBXbDvOurDJEX4CCnExO3bANzCSY20B7c0oIiSy', 'koki@gmail.com', 1, 'Koki', '01', 'iconfinder_General_Office_37_2530816.png'),
-(14, 'pemilik', '$2y$08$7KeUX66G.HcftzngXm/rCuiSte3mFAmLO3N2Nb8vceTEOcVFhfXc2', 'pemilik1@gmail.com', 1, 'Pemilik', '01', 'iconfinder_General_Office_37_25308163.png');
+(14, 'pemilik', '$2y$08$7KeUX66G.HcftzngXm/rCuiSte3mFAmLO3N2Nb8vceTEOcVFhfXc2', 'pemilik1@gmail.com', 1, 'Pemilik', '01', 'iconfinder_General_Office_37_25308163.png'),
+(24, 'kasir2', '$2y$08$.T3ys6s4CtXhHR5y5xZsqO4OlYu5b7wgCFxyYraaOzPTz7KA8.8dm', 'kasir2@gmail.com', 1, 'kasirr', '2', 'default.jpg'),
+(25, 'operator3', '$2y$08$LQxUM49MJMnwRmIyCn/BceNeBsiCihs.C0pZZVUY6tmEElqGdcCV2', 'kasir3@gmail.com', 1, 'operator', '3', 'default.jpg');
 
 -- --------------------------------------------------------
 
@@ -564,12 +646,9 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (95, 12, 33),
 (98, 13, 32),
 (102, 14, 1),
-(84, 20, 17),
-(78, 21, 17),
-(81, 22, 28),
-(85, 23, 17),
-(60, 24, 28),
+(122, 24, 2),
 (73, 25, 28),
+(123, 25, 33),
 (79, 26, 28),
 (80, 27, 28),
 (82, 28, 28),
@@ -795,7 +874,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT untuk tabel `groups`
@@ -813,7 +892,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT untuk tabel `menu_food_and_beverage`
 --
 ALTER TABLE `menu_food_and_beverage`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu_type`
@@ -825,7 +904,7 @@ ALTER TABLE `menu_type`
 -- AUTO_INCREMENT untuk tabel `rekapan_stok`
 --
 ALTER TABLE `rekapan_stok`
-  MODIFY `id_rekapan_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_rekapan_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT untuk tabel `setting`
@@ -837,25 +916,25 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT untuk tabel `stok_menu`
 --
 ALTER TABLE `stok_menu`
-  MODIFY `id_stok_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_stok_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

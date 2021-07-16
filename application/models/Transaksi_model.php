@@ -47,7 +47,7 @@ class Transaksi_model extends CI_Model
     function total_pesanan_masuk()
     {
         $this->db->where('status_transaksi', 'SELESAI');
-        $this->db->where('status_pelayanan', 'Belum Diterima');
+        $this->db->where('status_pelayanan', 'Belum Dimasak');
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }

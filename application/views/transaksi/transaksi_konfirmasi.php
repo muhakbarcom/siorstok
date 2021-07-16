@@ -6,7 +6,7 @@
                 <!-- <th>Gambar</th> -->
                 <th>No</th>
                 <th>Nama Menu</th>
-                <th>Item</th>
+                <th>Qty</th>
                 <th>Harga Menu</th>
                 <th>Sub Harga</th>
                 <th>Catatan</th>

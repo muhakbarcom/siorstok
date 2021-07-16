@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: 10px;margin-left:10px">
-                    <form action="<?php echo base_url('View_laporan_penjualan'); ?>" class="form-inline" method="post">
+                    <form action="<?php echo base_url('rekapan_stok'); ?>" class="form-inline" method="post">
                         <div class="col input-group">
                             <!-- <label><b>Filter :</b></label> -->
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
@@ -65,7 +65,7 @@
                         <tr>
                             <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
                             <th>No</th>
-                            <th>Id Menu</th>
+                            <th>Nama Menu</th>
                             <th>Tanggal Penjualan</th>
                             <th>Stok Terjual</th>
                             <th>Stok Sisa</th>
@@ -78,7 +78,8 @@
                                 <!-- <td style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $rekapan_stok->id_rekapan_stok; ?>" />&nbsp;</td> -->
 
                                 <td width="80px"><?php echo ++$start ?></td>
-                                <td><?php echo $rekapan_stok->id_menu ?></td>
+
+                                <td><?php echo $rekapan_stok->nama_menu ?></td>
                                 <td><?php echo $rekapan_stok->tanggal_penjualan ?></td>
                                 <td><?php echo $rekapan_stok->stok_terjual ?></td>
                                 <td><?php echo $rekapan_stok->stok_sisa ?></td>

@@ -82,6 +82,7 @@ $setting_aplikasi = $this->db->get('setting')->row();
   <script src="<?= base_url(); ?>assets/date_picker/bootstrap-datetimepicker.id.js"></script>
   <!-- mask -->
   <script src="<?= base_url(); ?>assets/dist/js/jquery.mask.min.js"></script>
+  <script src="<?= base_url(); ?>/assets/chart/dist/Chart.min.js"></script>
   <style type="text/css">
     .pagination>li>a,
     .pagination>li>span {

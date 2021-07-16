@@ -39,9 +39,11 @@ class View_laporan_penjualan extends CI_Controller
         if ($dari) {
             $config['total_rows'] = $this->View_laporan_penjualan_model->laporan_penjualan_total($q, $dari, $sampai);
             $view_laporan_penjualan = $this->View_laporan_penjualan_model->laporan_penjualan($config['per_page'], $start, $q, $dari, $sampai);
+            // $total_keseluruhan = $this->View_laporan_penjualan_model->get_total_keseluruhan_2($config['per_page'], $start, $q, $dari, $sampai);
         } else {
             $config['total_rows'] = $this->View_laporan_penjualan_model->total_rows($q);
             $view_laporan_penjualan = $this->View_laporan_penjualan_model->get_limit_data($config['per_page'], $start, $q);
+            // $total_keseluruhan = $this->View_laporan_penjualan_model->get_total_keseluruhan($config['per_page'], $start, $q);
         }
 
         $this->load->library('pagination');
@@ -51,6 +53,7 @@ class View_laporan_penjualan extends CI_Controller
             'view_laporan_penjualan_data' => $view_laporan_penjualan,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
+            // 'total_keseluruhan' => $total_keseluruhan,
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );

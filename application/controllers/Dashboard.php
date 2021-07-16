@@ -10,6 +10,7 @@ class Dashboard extends CI_Controller
 		$this->layout->auth();
 		$this->load->model('Transaksi_model');
 		$this->load->model('Menu_fb_model');
+		$this->load->model('View_laporan_bulanan_model');
 	}
 
 	public function index()
@@ -24,6 +25,9 @@ class Dashboard extends CI_Controller
 		$data['jml_pesanan_selesai'] = $this->Transaksi_model->total_pesanan_selesai();
 		$data['jml_food'] = $this->Menu_fb_model->total_menu_food();
 		$data['jml_bvrg'] = $this->Menu_fb_model->total_menu_beverage();
+		$data['grafik'] = $this->View_laporan_bulanan_model->get_all_grafik();
+
+
 		$data['title'] = 'Dashboard';
 		$data['subtitle'] = '';
 		$data['crumb'] = [

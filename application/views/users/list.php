@@ -42,8 +42,9 @@
                   <th><?php echo lang('index_lname_th'); ?></th>
                   <th><?php echo lang('index_email_th'); ?></th>
                   <th>Username</th>
-                  <th nowrap="nowrap"><?php echo lang('index_groups_th'); ?></th>
-                  <th><?php echo lang('index_status_th'); ?></th>
+                  <th nowrap="nowrap">Hak Akses</th>
+                  <!-- <th nowrap="nowrap"><?php echo lang('index_groups_th'); ?></th> -->
+                  <!-- <th><?php echo lang('index_status_th'); ?></th> -->
                   <th><?php echo lang('index_action_th'); ?></th>
                 </tr>
               </thead>
@@ -62,7 +63,7 @@
                       <?= implode(', ', $myArray); ?>
 
                     </td>
-                    <td><?php echo ($user->active) ? anchor("auth/deactivate/" . $user->id, lang('index_active_link'), 'class="btn btn-success btn-xs"') : anchor("auth/activate/" . $user->id, lang('index_inactive_link'), 'class="btn btn-danger  btn-xs"'); ?></td>
+                    <!-- <td><?php echo ($user->active) ? anchor("auth/deactivate/" . $user->id, lang('index_active_link'), 'class="btn btn-success btn-xs"') : anchor("auth/activate/" . $user->id, lang('index_inactive_link'), 'class="btn btn-danger  btn-xs"'); ?></td> -->
                     <td><?php echo anchor("auth/edit_user/" . $user->id, '<i class="fa fa-user-edit"></i>', 'class="btn btn-warning btn-xs" data-toogle="tooltip" title="Edit User"');
                         echo " ";
                         echo anchor('users/delete/' . $user->id, '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="return confirmdelete(\'users/delete/' . $user->id . '\')" data-toggle="tooltip" title="Delete"'); ?></td>

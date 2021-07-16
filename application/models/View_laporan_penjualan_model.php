@@ -43,12 +43,6 @@ class View_laporan_penjualan_model extends CI_Model
     }
     function laporan_penjualan_total($q = NULL, $dari, $sampai)
     {
-        // $this->db->like('', $q);
-        // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('kode_nota', $q);
-        // $this->db->or_like('nama_konsumen', $q);
-        // $this->db->or_like('jumlah_item', $q);
-        // $this->db->or_like('total_bayar', $q);
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
         $this->db->from($this->table);
@@ -56,27 +50,35 @@ class View_laporan_penjualan_model extends CI_Model
     }
 
     // get data with limit and search
+    function get_total_keseluruhan($limit, $start = 0, $q = NULL)
+    {
+        $this->db->select('sum(total_bayar) as total_keseluruhan');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit($limit, $start);
+        $tk = $this->db->get($this->table)->row();
+        var_dump($tk);
+        exit;
+    }
+    function get_total_keseluruhan_2($limit, $start = 0, $q = NULL, $dari, $sampai)
+    {
+        $this->db->select('sum(total_bayar) as total_keseluruhan');
+        $this->db->where('tanggal_transaksi >=', $dari);
+        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit($limit, $start);
+        $tk = $this->db->get($this->table)->row();
+        return $tk->total_keseluruhan;
+    }
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
         $this->db->order_by($this->id, $this->order);
-        // $this->db->like('', $q);
-        // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('kode_nota', $q);
-        // $this->db->or_like('nama_konsumen', $q);
-        // $this->db->or_like('jumlah_item', $q);
-        // $this->db->or_like('total_bayar', $q);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
     function laporan_penjualan($limit, $start = 0, $q = NULL, $dari, $sampai)
     {
         $this->db->order_by($this->id, $this->order);
-        // $this->db->like('', $q);
-        // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('kode_nota', $q);
-        // $this->db->or_like('nama_konsumen', $q);
-        // $this->db->or_like('jumlah_item', $q);
-        // $this->db->or_like('total_bayar', $q);
+
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
         $this->db->limit($limit, $start);
