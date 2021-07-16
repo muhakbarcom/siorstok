@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jul 2021 pada 17.32
+-- Waktu pembuatan: 16 Jul 2021 pada 19.15
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -156,7 +156,9 @@ INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_menu`
 (113, 66, 8, 3, 45000, '2021-07-16 21:15:29', 'Mienya setengah matang'),
 (114, 66, 51, 1, 15000, '2021-07-16 21:15:29', ''),
 (115, 67, 46, 1, 5000, '2021-07-16 21:42:38', ''),
-(116, 67, 45, 1, 15000, '2021-07-16 21:42:38', '');
+(116, 67, 45, 1, 15000, '2021-07-16 21:42:38', ''),
+(117, 68, 49, 3, 45000, '2021-07-16 22:45:51', 'kurangi gula'),
+(118, 68, 40, 1, 20000, '2021-07-16 22:45:51', '');
 
 --
 -- Trigger `detail_transaksi`
@@ -328,7 +330,6 @@ CREATE TABLE `menu_food_and_beverage` (
   `nama_menu` varchar(50) NOT NULL,
   `harga_menu` int(11) NOT NULL,
   `gambar` varchar(20) NOT NULL,
-  `deskripsi` varchar(20) DEFAULT NULL,
   `kategori_menu` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -336,37 +337,34 @@ CREATE TABLE `menu_food_and_beverage` (
 -- Dumping data untuk tabel `menu_food_and_beverage`
 --
 
-INSERT INTO `menu_food_and_beverage` (`id_menu`, `nama_menu`, `harga_menu`, `gambar`, `deskripsi`, `kategori_menu`) VALUES
-(2, 'Expresso', 15000, 'menu_(2).jpg', 'Tersedia', 'Beverage'),
-(4, 'Indomie Kornet', 15000, 'gambar_(9).jpg', 'Tersedia', 'Food'),
-(5, 'Cireng', 15000, 'gambar_(6).jpg', 'Tersedia', 'Food'),
-(6, 'Baci', 15000, 'menu_(9).jpg', 'Tersedia', 'Food'),
-(7, 'Bakso', 15000, 'gambar_(5).jpg', 'Tersedia', 'Food'),
-(8, 'Mie Goreng', 15000, 'menu_(10).jpg', 'Tersedia', 'Food'),
-(9, 'Mie Rebus', 15000, 'Mie_Kuah.jpg', 'Tersedia', 'Food'),
-(11, 'Mie Rebus  Telur', 15000, 'r.jpg', 'Tersedia', 'Food'),
-(28, 'Lemon tea', 15000, 'menu_(3).jpg', 'Tersedia', 'Beverage'),
-(29, 'Coffee Late', 15000, 'menu_(4).jpg', 'Tersedia', 'Beverage'),
-(34, 'Teh Manis', 3500, 'menu_(5).jpg', 'Tersedia', 'Beverage'),
-(35, 'Milo', 8000, 'menu_(6).jpg', 'Tersedia', 'Beverage'),
-(36, 'Siomay', 15000, 'gambar_(11).jpg', 'Tersedia', 'Food'),
-(37, 'Batagor', 15000, 'gambar_(12).jpg', 'Tersedia', 'Food'),
-(39, 'Kopi Susu', 15000, 'menu_(7).jpg', 'Tersedia', 'Beverage'),
-(40, 'Vanilla Greentea', 20000, 'menu_(8).jpg', 'Tersedia', 'Beverage'),
-(41, 'Cilok', 5000, 'gambar_(13).jpg', 'Tersedia', 'Food'),
-(42, 'Kroket', 5000, 'gambar_(3).jpg', 'Tersedia', 'Food'),
-(43, 'Pangsit', 15000, 'gambar_(1).jpg', 'Tersedia', 'Food'),
-(45, 'lasagna', 15000, 'makanan_(1).jpg', 'Tersedia', 'Food'),
-(46, 'Mlinjo', 5000, 'makanan_(2).jpg', 'Tersedia', 'Food'),
-(47, 'Makaroni', 15000, 'makanan_(3).jpg', 'Tersedia', 'Food'),
-(49, 'Red Velvet', 15000, 'menu_(11).jpg', 'Tersedia', 'Beverage'),
-(51, 'Choco Cookies', 15000, 'menu1.jpg', 'Tersedia', 'Food'),
-(52, 'Choco Kookies', 20000, 'menu_(6)1.jpg', 'Tersedia', 'Beverage'),
-(53, 'Makaroni', 25000, 'gambar_(3)1.jpg', 'Tersedia', 'Food'),
-(54, 'Makaroni', 20000, 'menu_(8)1.jpg', 'Tersedia', 'Food'),
-(55, 'Makaroni', 15000, 'indomie_rebus.jpg', 'Tersedia', 'Food'),
-(56, 'Makaroni', 15000, 'makanan_(2)1.jpg', 'Tersedia', 'Food'),
-(57, 'Makaroni', 23, 'indomie_rebus1.jpg', 'Tersedia', 'Food');
+INSERT INTO `menu_food_and_beverage` (`id_menu`, `nama_menu`, `harga_menu`, `gambar`, `kategori_menu`) VALUES
+(2, 'Expresso', 15000, 'menu_(2).jpg', 'Beverage'),
+(4, 'Indomie Kornet', 15000, 'gambar_(9).jpg', 'Food'),
+(5, 'Cireng', 15000, 'gambar_(6).jpg', 'Food'),
+(6, 'Baci', 15000, 'menu_(9).jpg', 'Food'),
+(7, 'Bakso', 15000, 'gambar_(5).jpg', 'Food'),
+(8, 'Mie Goreng', 15000, 'menu_(10).jpg', 'Food'),
+(9, 'Mie Rebus', 15000, 'Mie_Kuah.jpg', 'Food'),
+(11, 'Mie Rebus  Telur', 15000, 'r.jpg', 'Food'),
+(28, 'Lemon tea', 15000, 'menu_(3).jpg', 'Beverage'),
+(29, 'Coffee Late', 15000, 'menu_(4).jpg', 'Beverage'),
+(34, 'Teh Manis', 3500, 'menu_(5).jpg', 'Beverage'),
+(35, 'Milo', 8000, 'menu_(6).jpg', 'Beverage'),
+(36, 'Siomay', 15000, 'gambar_(11).jpg', 'Food'),
+(37, 'Batagor', 15000, 'gambar_(12).jpg', 'Food'),
+(39, 'Kopi Susu', 15000, 'menu_(7).jpg', 'Beverage'),
+(40, 'Vanilla Greentea', 20000, 'menu_(8).jpg', 'Beverage'),
+(41, 'Cilok', 5000, 'gambar_(13).jpg', 'Food'),
+(42, 'Kroket', 5000, 'gambar_(3).jpg', 'Food'),
+(43, 'Pangsit', 15000, 'gambar_(1).jpg', 'Food'),
+(45, 'lasagna', 15000, 'makanan_(1).jpg', 'Food'),
+(46, 'Mlinjo', 5000, 'makanan_(2).jpg', 'Food'),
+(49, 'Red Velvet', 15000, 'menu_(11).jpg', 'Beverage'),
+(51, 'Choco Cookies', 15000, 'menu1.jpg', 'Food'),
+(54, 'Makaroni', 20000, 'menu_(8)1.jpg', 'Food'),
+(55, 'Makaroni', 15000, 'indomie_rebus.jpg', 'Food'),
+(56, 'Makaroni', 15000, 'makanan_(2)1.jpg', 'Food'),
+(58, 'Teh Hangat', 20000, 'menu_(5)1.jpg', 'Beverage');
 
 --
 -- Trigger `menu_food_and_beverage`
@@ -435,7 +433,9 @@ INSERT INTO `rekapan_stok` (`id_rekapan_stok`, `id_menu`, `nama_menu`, `tanggal_
 (45, 8, 'Mie Goreng', '2021-07-16', 8, 292),
 (46, 51, 'Choco Cookies', '2021-07-16', 12, 288),
 (47, 46, 'Mlinjo', '2021-07-16', 4, 296),
-(48, 45, 'lasagna', '2021-07-16', 14, 286);
+(48, 45, 'lasagna', '2021-07-16', 14, 286),
+(49, 49, 'Red Velvet', '2021-07-16', 6, 314),
+(50, 40, 'Vanilla Greentea', '2021-07-16', 8, 302);
 
 -- --------------------------------------------------------
 
@@ -491,16 +491,14 @@ INSERT INTO `stok_menu` (`id_stok_menu`, `id_menu`, `jumlah_stok_menu`, `terjual
 (28, 36, 300, 203, 97),
 (29, 37, 300, 3, 297),
 (30, 39, 350, 2, 348),
-(31, 40, 310, 7, 303),
+(31, 40, 310, 8, 302),
 (32, 41, 300, 8, 292),
 (33, 42, 300, 8, 292),
 (34, 43, 300, 12, 288),
 (36, 45, 300, 14, 286),
 (37, 46, 300, 4, 296),
-(38, 47, 300, 6, 294),
-(40, 49, 320, 3, 317),
-(41, 51, 300, 12, 288),
-(42, 52, 370, 0, 370);
+(40, 49, 320, 6, 314),
+(41, 51, 300, 12, 288);
 
 -- --------------------------------------------------------
 
@@ -586,13 +584,14 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `nama_konsumen`, `jumlah_ite
 (58, 13, 'akbar', 1, '2021-07-14 15:06:56', 'SELESAI', 'Selesai', 15000, 120000, 105000),
 (59, 2, 'akbar', 1, '2021-07-14 15:08:17', 'SELESAI', 'Selesai', 5000, 100000, 95000),
 (60, 2, 'Farah', 18, '2021-07-14 22:57:52', 'SELESAI', 'Selesai', 270000, 300000, 30000),
-(61, 2, 'syifa', 6, '2021-07-15 01:42:39', 'SELESAI', 'Pesanan diterima', 105000, 120000, 15000),
-(62, 2, 'cica', 4, '2021-07-15 11:30:16', 'SELESAI', 'Pesanan diterima', 50000, 120000, 70000),
-(63, 2, 'gaga', 2, '2021-07-15 11:46:05', 'SELESAI', 'Pesanan diterima', 10000, 120000, 110000),
-(64, 2, 'taras', 3, '2021-07-15 11:50:33', 'SELESAI', 'Pesanan diterima', 45000, 50000, 5000),
-(65, 2, 'tipal', 4, '2021-07-15 23:01:01', 'diterima', 'Pesanan diterima', 60000, 0, 0),
-(66, 2, 'Ilsyah', 4, '2021-07-16 21:15:29', 'diterima', 'Pesanan diterima', 60000, 0, 0),
-(67, 14, 'yaya', 2, '2021-07-16 21:42:38', 'SELESAI', 'Pesanan diterima', 20000, 120000, 100000);
+(61, 2, 'syifa', 6, '2021-07-15 01:42:39', 'SELESAI', 'Selesai', 105000, 120000, 15000),
+(62, 2, 'cica', 4, '2021-07-15 11:30:16', 'SELESAI', 'Selesai', 50000, 120000, 70000),
+(63, 2, 'gaga', 2, '2021-07-15 11:46:05', 'SELESAI', 'Selesai', 10000, 120000, 110000),
+(64, 2, 'taras', 3, '2021-07-15 11:50:33', 'SELESAI', 'Selesai', 45000, 50000, 5000),
+(65, 2, 'tipal', 4, '2021-07-15 23:01:01', 'SELESAI', 'Selesai', 60000, 120000, 60000),
+(66, 2, 'Ilsyah', 4, '2021-07-16 21:15:29', 'SELESAI', 'Selesai', 60000, 70000, 10000),
+(67, 14, 'yaya', 2, '2021-07-16 21:42:38', 'SELESAI', 'Selesai', 20000, 120000, 100000),
+(68, 2, 'iyah', 4, '2021-07-16 22:45:51', 'SELESAI', 'Selesai', 65000, 65000, 0);
 
 -- --------------------------------------------------------
 
@@ -879,7 +878,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT untuk tabel `groups`
@@ -897,7 +896,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT untuk tabel `menu_food_and_beverage`
 --
 ALTER TABLE `menu_food_and_beverage`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu_type`
@@ -909,7 +908,7 @@ ALTER TABLE `menu_type`
 -- AUTO_INCREMENT untuk tabel `rekapan_stok`
 --
 ALTER TABLE `rekapan_stok`
-  MODIFY `id_rekapan_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_rekapan_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT untuk tabel `setting`
@@ -927,7 +926,7 @@ ALTER TABLE `stok_menu`
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

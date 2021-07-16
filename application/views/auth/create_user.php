@@ -85,7 +85,7 @@
                                                 $checked = null;
                                                 $item = null;
                                                 ?>
-                                                <input type="checkbox" name="groups[]" value="<?php echo $group['id']; ?>" <?php echo $checked; ?>>
+                                                <input type="radio" name="groups[]" value="<?php echo $group['id']; ?>" <?php echo $checked; ?>>
                                                 <?php echo htmlspecialchars($group['name'], ENT_QUOTES, 'UTF-8'); ?>
                                           </label>
                                     </div>
