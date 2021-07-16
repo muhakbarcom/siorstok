@@ -36,7 +36,7 @@ class Menu_fb_model extends CI_Model
         $this->db->or_like('nama_menu', $q);
         $this->db->or_like('harga_menu', $q);
         $this->db->or_like('gambar', $q);
-        $this->db->or_like('deskripsi', $q);
+        // $this->db->or_like('deskripsi', $q);
         $this->db->or_like('kategori_menu', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
@@ -64,7 +64,7 @@ class Menu_fb_model extends CI_Model
         $this->db->or_like('nama_menu', $q);
         $this->db->or_like('harga_menu', $q);
         $this->db->or_like('gambar', $q);
-        $this->db->or_like('deskripsi', $q);
+        // $this->db->or_like('deskripsi', $q);
         $this->db->or_like('kategori_menu', $q);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
@@ -123,26 +123,42 @@ class Menu_fb_model extends CI_Model
         return $qry;
     }
 
-    function get_limit_data_food_kelola($limit, $start = 0, $q = NULL, $x = "food")
+    function get_limit_data_food_kelola($limit, $start = 0, $q = NULL)
     {
-        $qry = $this->db->query("select * from menu_food_and_beverage
-        where 
-         kategori_menu='$x'
-        order by id_menu $this->order
-        limit $start,$limit
-        ")->result();
-        return $qry;
+        if ($q == NULL) {
+            $qry = $this->db->query("select * from menu_food_and_beverage
+            where kategori_menu='food'
+            order by id_menu $this->order
+            limit $start,$limit
+            ")->result();
+            return $qry;
+        } else {
+            // $this->db->like('id_menu', $q);
+            $this->db->order_by($this->id, $this->order);
+            $this->db->like('nama_menu', $q);
+            $this->db->where('kategori_menu', 'Food');
+            $this->db->limit($limit, $start);
+            return $this->db->get($this->table)->result();
+        }
     }
 
-    function get_limit_data_beverage_kelola($limit, $start = 0, $q = NULL)
+    function get_limit_data_beverage_kelola($limit, $start = 0, $q = NULL, $x = "Beverage")
     {
-        $qry = $this->db->query("select * from menu_food_and_beverage
-        where 
-         kategori_menu='Beverage'
-        order by id_menu $this->order
-        limit $start,$limit
-        ")->result();
-        return $qry;
+        if ($q == NULL) {
+            $qry = $this->db->query("select * from menu_food_and_beverage
+            where kategori_menu='$x'
+            order by id_menu $this->order
+            limit $start,$limit
+            ")->result();
+            return $qry;
+        } else {
+            // $this->db->like('id_menu', $q);
+            $this->db->order_by($this->id, $this->order);
+            $this->db->like('nama_menu', $q);
+            $this->db->where('kategori_menu', 'Beverage');
+            $this->db->limit($limit, $start);
+            return $this->db->get($this->table)->result();
+        }
     }
 
     // insert data

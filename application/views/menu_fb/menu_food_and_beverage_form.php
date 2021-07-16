@@ -28,10 +28,10 @@
                         <img src="<?= base_url('assets/uploads/image/menu/') . $gambar ?>" class="img-thumbnail">
                     <?php else : ?>
                     <?php endif ?>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="varchar">Deskripsi <?php echo form_error('deskripsi') ?></label>
                         <input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="Deskripsi" value="<?php echo $deskripsi; ?>" />
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="varchar">Kategori Menu <?php echo form_error('kategori_menu') ?></label>
                         <input type="text" class="form-control" name="kategori_menu" id="kategori_menu" placeholder="Kategori Menu" value="<?php echo $kategori_menu; ?>" />

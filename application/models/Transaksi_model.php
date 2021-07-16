@@ -68,6 +68,14 @@ class Transaksi_model extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+    function total_pesanan_selesai_today($hari_ini)
+    {
+        $this->db->where('status_transaksi', 'SELESAI');
+        $this->db->where('status_pelayanan', 'Selesai');
+        $this->db->where('tanggal_transaksi', $hari_ini);
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)

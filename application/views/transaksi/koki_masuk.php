@@ -24,7 +24,7 @@
                     <div class="col-md-1 text-right">
                     </div>
                     <div class="col-md-3 text-right">
-                        <form action="<?php echo site_url('transaksi/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                        <!-- <form action="<?php echo site_url('transaksi/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
@@ -38,7 +38,7 @@
                                     <button class="btn btn-primary" type="submit">Search</button>
                                 </span>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 <form method="post" action="<?= site_url('transaksi/deletebulk'); ?>" id="formbulk">

@@ -45,9 +45,9 @@
 								<?php echo rupiah($vmt->harga_menu); ?>
 							</b>
 							<br>
-						<p style="font-size: 12px" align="right">
+							<!-- <p style="font-size: 12px" align="right">
 							<?php echo $vmt->deskripsi; ?>
-						</p>
+						</p> -->
 					</div>
 				</a>
 			</div>

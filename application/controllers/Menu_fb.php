@@ -111,7 +111,7 @@ class Menu_fb extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Menu_fb_model->total_rows($q);
-        $menu_fb = $this->Menu_fb_model->get_limit_data_beverage_kelola($config['per_page'], $start, $q);
+        $menu_fb = $this->Menu_fb_model->get_limit_data_beverage_kelola($config['per_page'], $start, $q, 'Beverage');
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -145,7 +145,7 @@ class Menu_fb extends CI_Controller
                 'nama_menu' => $row->nama_menu,
                 'harga_menu' => $row->harga_menu,
                 'gambar' => $row->gambar,
-                'deskripsi' => $row->deskripsi,
+                // 'deskripsi' => $row->deskripsi,
                 'kategori_menu' => $row->kategori_menu,
             );
             $data['title'] = 'Menu Fb';
@@ -171,7 +171,7 @@ class Menu_fb extends CI_Controller
             'nama_menu' => set_value('nama_menu'),
             'harga_menu' => set_value('harga_menu'),
             'gambar' => set_value('gambar'),
-            'deskripsi' => set_value('deskripsi'),
+            // 'deskripsi' => set_value('deskripsi'),
             'kategori_menu' => set_value('kategori_menu'),
         );
         $data['title'] = 'Menu Food and Bvrg';
@@ -220,7 +220,7 @@ class Menu_fb extends CI_Controller
                     'nama_menu' => $this->input->post('nama_menu', TRUE),
                     'harga_menu' => $this->input->post('harga_menu', TRUE),
                     'gambar' => $gambar,
-                    'deskripsi' => $this->input->post('deskripsi', TRUE),
+                    // 'deskripsi' => $this->input->post('deskripsi', TRUE),
                     'kategori_menu' => $this->input->post('kategori_menu', TRUE),
                 );
 
@@ -243,7 +243,7 @@ class Menu_fb extends CI_Controller
                 'nama_menu' => set_value('nama_menu', $row->nama_menu),
                 'harga_menu' => set_value('harga_menu', $row->harga_menu),
                 'gambar' => set_value('gambar', $row->gambar),
-                'deskripsi' => set_value('deskripsi', $row->deskripsi),
+                // 'deskripsi' => set_value('deskripsi', $row->deskripsi),
                 'kategori_menu' => set_value('kategori_menu', $row->kategori_menu),
             );
             $data['title'] = 'Update Menu ';
@@ -289,7 +289,7 @@ class Menu_fb extends CI_Controller
                 'nama_menu' => $this->input->post('nama_menu', TRUE),
                 'harga_menu' => $this->input->post('harga_menu', TRUE),
                 // 'gambar' => $this->input->post('gambar',TRUE),
-                'deskripsi' => $this->input->post('deskripsi', TRUE),
+                // 'deskripsi' => $this->input->post('deskripsi', TRUE),
                 'kategori_menu' => $this->input->post('kategori_menu', TRUE),
             );
 
@@ -329,7 +329,7 @@ class Menu_fb extends CI_Controller
         $this->form_validation->set_rules('nama_menu', 'nama menu', 'trim|required');
         $this->form_validation->set_rules('harga_menu', 'harga menu', 'trim|required');
         // $this->form_validation->set_rules('gambar', 'gambar', 'trim|required');
-        $this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
+        // $this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
         $this->form_validation->set_rules('kategori_menu', 'kategori menu', 'trim|required');
 
         $this->form_validation->set_rules('id_menu', 'id_menu', 'trim');

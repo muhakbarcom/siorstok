@@ -52,11 +52,16 @@ class Stok_menu_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_stok_menu', $q);
-        $this->db->or_like('id_menu', $q);
-        $this->db->or_like('jumlah_stok_menu', $q);
-        $this->db->or_like('terjual', $q);
-        $this->db->or_like('sisa', $q);
+        $this->db->select('mfb.nama_menu,sm.id_stok_menu,sm.id_menu, sm.jumlah_stok_menu,sm.terjual,sm.sisa');
+        $this->db->from('stok_menu sm');
+        $this->db->join('menu_food_and_beverage mfb', 'sm.id_menu = mfb.id_menu', 'left');
+        $this->db->like('sm.id_stok_menu', $q);
+        $this->db->or_like('mfb.nama_menu', $q);
+        // $this->db->or_like('sm.id_menu', $q);
+        $this->db->or_like('sm.jumlah_stok_menu', $q);
+        $this->db->or_like('sm.terjual', $q);
+        $this->db->or_like('sm.sisa', $q);
+        $this->db->group_by('sm.id_menu');
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

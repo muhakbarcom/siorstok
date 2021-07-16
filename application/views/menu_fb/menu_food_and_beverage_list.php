@@ -24,14 +24,14 @@
                     <div class="col-md-1 text-right">
                     </div>
                     <div class="col-md-3 text-right">
-                        <form action="<?php echo site_url('menu_fb/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                        <form action="<?php echo site_url('menu_fb/' . $kat); ?>" class="form-inline" method="get" style="margin-top:10px">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
                                     <?php
                                     if ($q <> '') {
                                     ?>
-                                        <a href="<?php echo site_url('menu_fb'); ?>" class="btn btn-default">Reset</a>
+                                        <a href="<?php echo site_url('menu_fb/' . $kat); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                     }
                                     ?>
@@ -49,7 +49,7 @@
                             <th>Nama Menu</th>
                             <th>Harga Menu</th>
                             <th>Gambar</th>
-                            <th>Deskripsi</th>
+                            <!-- <th>Deskripsi</th> -->
                             <th>Kategori Menu</th>
                             <th>Action</th>
                         </tr><?php
@@ -63,7 +63,7 @@
                                 <td><?php echo $menu_fb->nama_menu ?></td>
                                 <td><?php echo $menu_fb->harga_menu ?></td>
                                 <td> <img src="<?= base_url('assets/uploads/image/menu/') . $menu_fb->gambar; ?>" class="img-thumbnail" width="50px"></td>
-                                <td><?php echo $menu_fb->deskripsi ?></td>
+                                <!-- <td><?php echo $menu_fb->deskripsi ?></td> -->
                                 <td><?php echo $menu_fb->kategori_menu ?></td>
                                 <td style="text-align:center" width="200px">
                                     <?php if ($submenu == 1) : ?>
