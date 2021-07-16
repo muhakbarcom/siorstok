@@ -68,7 +68,7 @@
                             <th>Tanggal Transaksi</th>
                             <th>Kode Nota</th>
                             <th>Nama Konsumen</th>
-                            <th>Jumlah Item</th>
+                            <th>Qty</th>
                             <th>Total Bayar</th>
                             <?php $total_keseluruhan = 0; ?>
                             <!-- <th>Action</th> -->

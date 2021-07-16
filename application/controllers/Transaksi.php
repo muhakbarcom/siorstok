@@ -315,16 +315,23 @@ class Transaksi extends CI_Controller
     public function selesai_trx()
     {
         $id_trx = $this->input->post('id_trx');
-        $data = array(
+        $total = $this->input->post('total', TRUE);
+        $bayar = $this->input->post('bayar', TRUE);
+        if ($bayar < $total) {
+            $this->session->set_flashdata('error', 'UANG ANDA KURANG!');
+            redirect('transaksi/konfirmasi_trx/' . $id_trx);
+        } else {
+            $data = array(
 
-            'status_transaksi' => 'SELESAI',
-            'bayar' => $this->input->post('bayar', TRUE),
-            'kembalian' => $this->input->post('kembalian', TRUE),
-        );
+                'status_transaksi' => 'SELESAI',
+                'bayar' => $this->input->post('bayar', TRUE),
+                'kembalian' => $this->input->post('kembalian', TRUE),
+            );
 
-        $this->Transaksi_model->update($id_trx, $data);
+            $this->Transaksi_model->update($id_trx, $data);
 
-        redirect('transaksi_selesai');
+            redirect('transaksi_selesai');
+        }
     }
 
     public function cetak_trx($id)

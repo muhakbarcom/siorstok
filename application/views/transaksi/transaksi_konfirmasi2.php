@@ -6,7 +6,7 @@
                 <!-- <th>Gambar</th> -->
                 <th>No</th>
                 <th>Nama Menu</th>
-                <th>Item</th>
+                <th>Qty</th>
                 <th>Harga Menu</th>
                 <th>Sub Harga</th>
                 <th>Catatan</th>
@@ -36,17 +36,15 @@
         <div class="col-md-4 text-right"></div>
         <div class="col-md-8"> <b>Total Bayar</b> <?= rupiah($total_bayar); ?></div>
     </div>
-    <input id="total" type="hidden" class="form-group" name="total" value="<?= $total_bayar; ?>">
+    <input id="total" type="hidden" name="total" class="form-group" name="total" value="<?= $total_bayar; ?>">
     <input id="id_trx" type="hidden" class="form-group" name="id_trx" value="<?= $id_trx; ?>">
     <div class="row">
         <div class="col-md-4 text-right"></div>
         <div class="col-md-2"> <b>Bayar(CASH)</b> </div>
-        <div class="col-md-3"> <input id="bayar" type="text" class="form-group" name="bayar" onkeyup="sum();" required></div>
+        <div class="col-md-3"> <input id="bayar" type="text" class="form-group" name="bayar" onkeyup="sum();" onkeydown="sum();" required></div>
         <div class="col-md-3"> </div>
     </div>
     <div class="row">
-
-
         <div class="col-md-4 text-right"></div>
         <div class="col-md-2"> <b>Kembalian</b> </div>
 
@@ -73,6 +71,11 @@
         var txtFirstNumberValue = document.getElementById('bayar').value;
         var txtSecondNumberValue = document.getElementById('total').value;
         var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+
+        if (isNaN(result)) {
+            document.getElementById('kembalian').value = 0;
+            document.getElementById("demo").innerHTML = 0;
+        }
         if (!isNaN(result)) {
             document.getElementById('kembalian').value = result;
             document.getElementById("demo").innerHTML = result;

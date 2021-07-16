@@ -66,7 +66,7 @@
                             <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
                             <th>No</th>
                             <th>Tanggal Transaksi</th>
-                            <th>Jumlah Item Terjual</th>
+                            <th>Jumlah Qty Item Terjual</th>
                             <th>Total Pendapatan</th>
                             <?php $total_keseluruhan = 0; ?>
                             <!-- <th>Action</th> -->
