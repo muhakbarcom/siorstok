@@ -32,14 +32,22 @@ class Transaksi_model extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->like('id_transaksi', $q);
-        $this->db->or_like('jumlah_item', $q);
-        $this->db->or_like('nama_konsumen', $q);
-        $this->db->or_like('tanggal_transaksi', $q);
-        $this->db->or_like('total_bayar', $q);
-        $this->db->or_like('status_transaksi', $q);
-        $this->db->or_like('status_pelayanan', $q);
-        $this->db->or_like('id_user', $q);
+        $this->db->like('nama_konsumen', $q);
+        // $this->db->or_like('qty', $q);
+        // $this->db->or_like('nama_konsumen', $q);
+        // $this->db->or_like('tanggal_transaksi', $q);
+        // $this->db->or_like('total_bayar', $q);
+        // $this->db->or_like('status_transaksi', $q);
+        // $this->db->or_like('status_pelayanan', $q);
+        // $this->db->or_like('id_user', $q);
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+    function total_rows_koki_selesai($q = NULL)
+    {
+        $this->db->like('nama_konsumen', $q);
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('status_pelayanan', 'Selesai');
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -47,7 +55,7 @@ class Transaksi_model extends CI_Model
     function total_pesanan_masuk()
     {
         $this->db->where('status_transaksi', 'SELESAI');
-        $this->db->where('status_pelayanan', 'Belum Dimasak');
+        $this->db->where('status_pelayanan', 'Pesanan diterima');
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -82,7 +90,7 @@ class Transaksi_model extends CI_Model
     {
         $this->db->order_by($this->id, $this->order);
         // $this->db->like('id_transaksi', $q);
-        // $this->db->or_like('jumlah_item', $q);
+        // $this->db->or_like('qty', $q);
         // $this->db->or_like('nama_konsumen', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
         // $this->db->or_like('total_bayar', $q);
@@ -98,7 +106,7 @@ class Transaksi_model extends CI_Model
     {
         $this->db->order_by($this->id, $this->order);
         // $this->db->like('id_transaksi', $q);
-        // $this->db->or_like('jumlah_item', $q);
+        // $this->db->or_like('qty', $q);
         // $this->db->or_like('nama_konsumen', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
         // $this->db->or_like('total_bayar', $q);
@@ -115,15 +123,15 @@ class Transaksi_model extends CI_Model
 
     function get_limit_data_koki_selesai($limit, $start = 0, $q = NULL)
     {
-        $this->db->order_by($this->id, $this->order);
         // $this->db->like('id_transaksi', $q);
-        // $this->db->or_like('jumlah_item', $q);
         // $this->db->or_like('nama_konsumen', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
         // $this->db->or_like('total_bayar', $q);
         // $this->db->or_like('status_transaksi', $q);
         // // $this->db->or_like('status_pelayanan', $q);
         // $this->db->or_like('id_user', $q);
+        $this->db->like('nama_konsumen', $q);
+        $this->db->order_by($this->id, $this->order);
         $this->db->where('status_pelayanan', 'Selesai');
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

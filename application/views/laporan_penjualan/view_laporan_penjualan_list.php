@@ -65,7 +65,7 @@
 			<td><?php echo $laporan_penjualan->tanggal_transaksi ?></td>
 			<td><?php echo $laporan_penjualan->kode_nota ?></td>
 			<td><?php echo $laporan_penjualan->nama_konsumen ?></td>
-			<td><?php echo $laporan_penjualan->jumlah_item ?></td>
+			<td><?php echo $laporan_penjualan->qty ?></td>
 			<td><?php echo $laporan_penjualan->total_bayar ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
@@ -124,7 +124,7 @@
             var prompt = alertify.confirm('Apakah anda yakin akan menghapus data tersebut?',
                 'Apakah anda yakin akan menghapus data tersebut?').set('labels', {
                 ok: 'Yakin',
-                cancel: 'Batal!'
+                cancel: 'Batal!'    
             }).set('onok', function (closeEvent) {
 
                 $.ajax({

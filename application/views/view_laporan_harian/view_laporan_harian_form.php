@@ -19,8 +19,8 @@
             <input type="text" class="form-control" name="tanggal_transaksi" id="tanggal_transaksi" placeholder="Tanggal Transaksi" value="<?php echo $tanggal_transaksi; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="decimal">Jumlah Item Terjual <?php echo form_error('jumlah_item_terjual') ?></label>
-            <input type="text" class="form-control" name="jumlah_item_terjual" id="jumlah_item_terjual" placeholder="Jumlah Item Terjual" value="<?php echo $jumlah_item_terjual; ?>" />
+            <label for="decimal">Jumlah Item Terjual <?php echo form_error('qty_terjual') ?></label>
+            <input type="text" class="form-control" name="qty_terjual" id="qty_terjual" placeholder="Jumlah Item Terjual" value="<?php echo $qty_terjual; ?>" />
         </div>
 	    <div class="form-group">
             <label for="decimal">Total Pendapatan <?php echo form_error('total_pendapatan') ?></label>

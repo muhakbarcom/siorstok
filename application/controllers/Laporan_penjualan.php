@@ -9,7 +9,7 @@ class Laporan_penjualan extends CI_Controller
     {
         parent::__construct();
         $c_url = $this->router->fetch_class();
-        $this->layout->auth(); 
+        $this->layout->auth();
         $this->layout->auth_privilege($c_url);
         $this->load->model('Laporan_penjualan_model');
         $this->load->library('form_validation');
@@ -19,7 +19,7 @@ class Laporan_penjualan extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'laporan_penjualan?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'laporan_penjualan?q=' . urlencode($q);
@@ -53,42 +53,42 @@ class Laporan_penjualan extends CI_Controller
         $this->load->view('template/backend', $data);
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Laporan_penjualan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'tanggal_transaksi' => $row->tanggal_transaksi,
-		'kode_nota' => $row->kode_nota,
-		'nama_konsumen' => $row->nama_konsumen,
-		'jumlah_item' => $row->jumlah_item,
-		'total_bayar' => $row->total_bayar,
-	    );
-        $data['title'] = 'Laporan Penjualan';
-        $data['subtitle'] = '';
-        $data['crumb'] = [
-            'Dashboard' => '',
-        ];
+                'tanggal_transaksi' => $row->tanggal_transaksi,
+                'kode_nota' => $row->kode_nota,
+                'nama_konsumen' => $row->nama_konsumen,
+                'qty' => $row->qty,
+                'total_bayar' => $row->total_bayar,
+            );
+            $data['title'] = 'Laporan Penjualan';
+            $data['subtitle'] = '';
+            $data['crumb'] = [
+                'Dashboard' => '',
+            ];
 
-        $data['page'] = 'laporan_penjualan/view_laporan_penjualan_read';
-        $this->load->view('template/backend', $data);
+            $data['page'] = 'laporan_penjualan/view_laporan_penjualan_read';
+            $this->load->view('template/backend', $data);
         } else {
             $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('laporan_penjualan'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('laporan_penjualan/create_action'),
-	    'tanggal_transaksi' => set_value('tanggal_transaksi'),
-	    'kode_nota' => set_value('kode_nota'),
-	    'nama_konsumen' => set_value('nama_konsumen'),
-	    'jumlah_item' => set_value('jumlah_item'),
-	    'total_bayar' => set_value('total_bayar'),
-	);
+            'tanggal_transaksi' => set_value('tanggal_transaksi'),
+            'kode_nota' => set_value('kode_nota'),
+            'nama_konsumen' => set_value('nama_konsumen'),
+            'qty' => set_value('qty'),
+            'total_bayar' => set_value('total_bayar'),
+        );
         $data['title'] = 'Laporan Penjualan';
         $data['subtitle'] = '';
         $data['crumb'] = [
@@ -98,8 +98,8 @@ class Laporan_penjualan extends CI_Controller
         $data['page'] = 'laporan_penjualan/view_laporan_penjualan_form';
         $this->load->view('template/backend', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -107,20 +107,20 @@ class Laporan_penjualan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'tanggal_transaksi' => $this->input->post('tanggal_transaksi',TRUE),
-		'kode_nota' => $this->input->post('kode_nota',TRUE),
-		'nama_konsumen' => $this->input->post('nama_konsumen',TRUE),
-		'jumlah_item' => $this->input->post('jumlah_item',TRUE),
-		'total_bayar' => $this->input->post('total_bayar',TRUE),
-	    );
+                'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
+                'kode_nota' => $this->input->post('kode_nota', TRUE),
+                'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
+                'total_bayar' => $this->input->post('total_bayar', TRUE),
+            );
 
             $this->Laporan_penjualan_model->insert($data);
             $this->session->set_flashdata('success', 'Create Record Success');
             redirect(site_url('laporan_penjualan'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Laporan_penjualan_model->get_by_id($id);
 
@@ -128,27 +128,27 @@ class Laporan_penjualan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('laporan_penjualan/update_action'),
-		'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
-		'kode_nota' => set_value('kode_nota', $row->kode_nota),
-		'nama_konsumen' => set_value('nama_konsumen', $row->nama_konsumen),
-		'jumlah_item' => set_value('jumlah_item', $row->jumlah_item),
-		'total_bayar' => set_value('total_bayar', $row->total_bayar),
-	    );
+                'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
+                'kode_nota' => set_value('kode_nota', $row->kode_nota),
+                'nama_konsumen' => set_value('nama_konsumen', $row->nama_konsumen),
+                'qty' => set_value('qty', $row->qty),
+                'total_bayar' => set_value('total_bayar', $row->total_bayar),
+            );
             $data['title'] = 'Laporan Penjualan';
-        $data['subtitle'] = '';
-        $data['crumb'] = [
-            'Dashboard' => '',
-        ];
+            $data['subtitle'] = '';
+            $data['crumb'] = [
+                'Dashboard' => '',
+            ];
 
-        $data['page'] = 'laporan_penjualan/view_laporan_penjualan_form';
-        $this->load->view('template/backend', $data);
+            $data['page'] = 'laporan_penjualan/view_laporan_penjualan_form';
+            $this->load->view('template/backend', $data);
         } else {
             $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('laporan_penjualan'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -156,20 +156,20 @@ class Laporan_penjualan extends CI_Controller
             $this->update($this->input->post('', TRUE));
         } else {
             $data = array(
-		'tanggal_transaksi' => $this->input->post('tanggal_transaksi',TRUE),
-		'kode_nota' => $this->input->post('kode_nota',TRUE),
-		'nama_konsumen' => $this->input->post('nama_konsumen',TRUE),
-		'jumlah_item' => $this->input->post('jumlah_item',TRUE),
-		'total_bayar' => $this->input->post('total_bayar',TRUE),
-	    );
+                'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
+                'kode_nota' => $this->input->post('kode_nota', TRUE),
+                'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
+                'total_bayar' => $this->input->post('total_bayar', TRUE),
+            );
 
             $this->Laporan_penjualan_model->update($this->input->post('', TRUE), $data);
             $this->session->set_flashdata('success', 'Update Record Success');
             redirect(site_url('laporan_penjualan'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Laporan_penjualan_model->get_by_id($id);
 
@@ -183,28 +183,28 @@ class Laporan_penjualan extends CI_Controller
         }
     }
 
-    public function deletebulk(){
+    public function deletebulk()
+    {
         $delete = $this->Laporan_penjualan_model->deletebulk();
-        if($delete){
+        if ($delete) {
             $this->session->set_flashdata('success', 'Delete Record Success');
-        }else{
+        } else {
             $this->session->set_flashdata('error', 'Delete Record failed');
         }
         echo $delete;
     }
-   
-    public function _rules() 
+
+    public function _rules()
     {
-	$this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
-	$this->form_validation->set_rules('kode_nota', 'kode nota', 'trim|required');
-	$this->form_validation->set_rules('nama_konsumen', 'nama konsumen', 'trim|required');
-	$this->form_validation->set_rules('jumlah_item', 'jumlah item', 'trim|required');
-	$this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
+        $this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
+        $this->form_validation->set_rules('kode_nota', 'kode nota', 'trim|required');
+        $this->form_validation->set_rules('nama_konsumen', 'nama konsumen', 'trim|required');
+        $this->form_validation->set_rules('qty', 'jumlah item', 'trim|required');
+        $this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
 
-	$this->form_validation->set_rules('', '', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('', '', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
-
 }
 
 /* End of file Laporan_penjualan.php */

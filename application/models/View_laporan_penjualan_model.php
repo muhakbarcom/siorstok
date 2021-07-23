@@ -36,18 +36,23 @@ class View_laporan_penjualan_model extends CI_Model
         // $this->db->or_like('tanggal_transaksi', $q);
         // $this->db->or_like('kode_nota', $q);
         // $this->db->or_like('nama_konsumen', $q);
-        // $this->db->or_like('jumlah_item', $q);
+        // $this->db->or_like('qty', $q);
         // $this->db->or_like('total_bayar', $q);
+        $this->db->like('kode_nota', $q);
+        $this->db->or_like('nama_konsumen', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
     function laporan_penjualan_total($q = NULL, $dari, $sampai)
     {
+        // $this->db->like('kode_nota', $q);
+        $this->db->like('nama_konsumen', $q);
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
 
     // get data with limit and search
     function get_total_keseluruhan($limit, $start = 0, $q = NULL)
@@ -71,17 +76,55 @@ class View_laporan_penjualan_model extends CI_Model
     }
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
+        // $this->db->select("tanggal_transaksi,kode_nota,nama_konsumen,jumlah_items,qty,total_bayar,sum(total_bayar) as total_pendapatan");
+        $this->db->like('kode_nota', $q);
+        $this->db->or_like('nama_konsumen', $q);
         $this->db->order_by($this->id, $this->order);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
-    function laporan_penjualan($limit, $start = 0, $q = NULL, $dari, $sampai)
+    function get_limit_data_x($q = NULL)
     {
+        // $this->db->select("tanggal_transaksi,kode_nota,nama_konsumen,jumlah_items,qty,total_bayar,sum(total_bayar) as total_pendapatan");
+        $this->db->like('kode_nota', $q);
+        $this->db->or_like('nama_konsumen', $q);
         $this->db->order_by($this->id, $this->order);
-
+        return $this->db->get($this->table)->result();
+    }
+    function get_limit_data_tp($q = NULL)
+    {
+        $this->db->select('sum(total_bayar)as total_bayar');
+        $this->db->like('kode_nota', $q);
+        $this->db->or_like('nama_konsumen', $q);
+        return $this->db->get($this->table)->row();
+    }
+    function laporan_penjualan_tp($q = NULL, $dari, $sampai)
+    {
+        $this->db->select("sum(total_bayar) as total_bayar");
+        $this->db->like('nama_konsumen', $q);
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
+        return $this->db->get($this->table)->row();
+    }
+    function laporan_penjualan($limit, $start = 0, $q = NULL, $dari, $sampai)
+    {
+
+        // $this->db->select("tanggal_transaksi,kode_nota,nama_konsumen,jumlah_items,qty,total_bayar,sum(total_bayar) as total_pendapatan");
+        $this->db->like('nama_konsumen', $q);
+        $this->db->where('tanggal_transaksi >=', $dari);
+        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->order_by($this->id, $this->order);
         $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+    function laporan_penjualan_x($q = NULL, $dari, $sampai)
+    {
+
+        // $this->db->select("tanggal_transaksi,kode_nota,nama_konsumen,jumlah_items,qty,total_bayar,sum(total_bayar) as total_pendapatan");
+        $this->db->like('nama_konsumen', $q);
+        $this->db->where('tanggal_transaksi >=', $dari);
+        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
 

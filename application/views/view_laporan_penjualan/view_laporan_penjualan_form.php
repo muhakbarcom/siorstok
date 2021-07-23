@@ -27,8 +27,8 @@
             <input type="text" class="form-control" name="nama_konsumen" id="nama_konsumen" placeholder="Nama Konsumen" value="<?php echo $nama_konsumen; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Jumlah Item <?php echo form_error('jumlah_item') ?></label>
-            <input type="text" class="form-control" name="jumlah_item" id="jumlah_item" placeholder="Jumlah Item" value="<?php echo $jumlah_item; ?>" />
+            <label for="int">Jumlah Item <?php echo form_error('qty') ?></label>
+            <input type="text" class="form-control" name="qty" id="qty" placeholder="Jumlah Item" value="<?php echo $qty; ?>" />
         </div>
 	    <div class="form-group">
             <label for="int">Total Bayar <?php echo form_error('total_bayar') ?></label>

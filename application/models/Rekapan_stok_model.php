@@ -32,32 +32,47 @@ class Rekapan_stok_model extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->like('id_rekapan_stok', $q);
-        $this->db->or_like('id_menu', $q);
-        $this->db->or_like('tanggal_penjualan', $q);
-        $this->db->or_like('stok_terjual', $q);
-        $this->db->or_like('stok_sisa', $q);
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual, sum(stok_sisa) as stok_sisa");
+        $this->db->like('nama_menu', $q);
+        // $this->db->or_like('id_menu', $q);
+        // $this->db->or_like('tanggal_penjualan', $q);
+        // $this->db->or_like('stok_terjual', $q);
+        // $this->db->or_like('stok_sisa', $q);
         $this->db->from($this->table);
+        $this->db->group_by('id_menu');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
-        $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_rekapan_stok', $q);
-        $this->db->or_like('id_menu', $q);
-        $this->db->or_like('tanggal_penjualan', $q);
-        $this->db->or_like('stok_terjual', $q);
-        $this->db->or_like('stok_sisa', $q);
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual, sum(stok_sisa) as stok_sisa");
+        $this->db->like('nama_menu', $q);
+        // $this->db->or_like('id_menu', $q);
+        // $this->db->or_like('tanggal_penjualan', $q);
+        // $this->db->or_like('stok_terjual', $q);
+        // $this->db->or_like('stok_sisa', $q);
+        $this->db->group_by('id_menu');
+        $this->db->order_by('sum(stok_terjual)', 'DESC');
         $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+    function get_limit_data_x($q = NULL)
+    {
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual");
+        $this->db->like('nama_menu', $q);
+        $this->db->group_by('id_menu');
+        $this->db->order_by('sum(stok_terjual)', 'DESC');
         return $this->db->get($this->table)->result();
     }
     function laporan_stok_total($q = NULL, $dari, $sampai)
     {
         // 
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual, sum(stok_sisa) as stok_sisa");
+        $this->db->like('nama_menu', $q);
         $this->db->where('tanggal_penjualan >=', $dari);
         $this->db->where('tanggal_penjualan <=', $sampai);
+        $this->db->group_by('id_menu');
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -65,15 +80,28 @@ class Rekapan_stok_model extends CI_Model
     // get data with limit and search
     function laporan_stok($limit, $start = 0, $q = NULL, $dari, $sampai)
     {
-        $this->db->order_by($this->id, $this->order);
         // $this->db->like('id_rekapan_stok', $q);
         // $this->db->or_like('id_menu', $q);
         // $this->db->or_like('tanggal_penjualan', $q);
         // $this->db->or_like('stok_terjual', $q);
         // $this->db->or_like('stok_sisa', $q);
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual, sum(stok_sisa) as stok_sisa");
+        $this->db->like('nama_menu', $q);
         $this->db->where('tanggal_penjualan >=', $dari);
         $this->db->where('tanggal_penjualan <=', $sampai);
+        $this->db->group_by('id_menu');
+        $this->db->order_by('sum(stok_terjual)', 'DESC');
         $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+    function laporan_stok_x($q = NULL, $dari, $sampai)
+    {
+        $this->db->select("nama_menu, sum(stok_terjual) as stok_terjual");
+        $this->db->like('nama_menu', $q);
+        $this->db->where('tanggal_penjualan >=', $dari);
+        $this->db->where('tanggal_penjualan <=', $sampai);
+        $this->db->group_by('id_menu');
+        $this->db->order_by('sum(stok_terjual)', 'DESC');
         return $this->db->get($this->table)->result();
     }
 

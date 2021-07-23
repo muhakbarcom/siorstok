@@ -24,7 +24,7 @@
                 <tr>
                     <td><?= $i; ?></td>
                     <td><?= $k->nama_menu; ?></td>
-                    <td><?= $k->jumlah_item; ?></td>
+                    <td><?= $k->qty; ?></td>
                     <td><?= rupiah($k->harga_menu); ?></td>
                     <td><?= rupiah($k->total_bayar); ?></td>
                     <!-- <td><input type="text" class="form-control" name="<?php echo $i . 'catatan'; ?>"></td> -->

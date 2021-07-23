@@ -280,12 +280,12 @@ class Ion_auth_model extends CI_Model
 		}
 
 
-		if ($this->store_salt && $salt) {
-			return sha1($password . $salt);
-		} else {
-			$salt = $this->salt();
-			return $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
-		}
+		// if ($this->store_salt && $salt) {
+		// 	return sha1($password . $salt);
+		// } else {
+		// 	$salt = $this->salt();
+		// 	return $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
+		// }
 	}
 
 	/**
@@ -1735,7 +1735,7 @@ class Ion_auth_model extends CI_Model
 		if (array_key_exists($this->identity_column, $data) || array_key_exists('password', $data) || array_key_exists('email', $data)) {
 			if (array_key_exists('password', $data)) {
 				if (!empty($data['password'])) {
-					$data['password'] = $this->hash_password($data['password'], $user->salt);
+					$data['password'] = $this->hash_password($data['password']);
 				} else {
 					// unset password so it doesn't effect database entry if no password passed
 					unset($data['password']);

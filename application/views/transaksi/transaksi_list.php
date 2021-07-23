@@ -62,7 +62,7 @@
                                 <!-- <td style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->id_transaksi; ?>" />&nbsp;</td> -->
 
                                 <td width="80px"><?php echo ++$start ?></td>
-                                <td><?php echo $transaksi->jumlah_item ?></td>
+                                <td><?php echo $transaksi->qty ?></td>
                                 <td><?php echo $transaksi->nama_konsumen ?></td>
                                 <td><?php echo $transaksi->tanggal_transaksi ?></td>
                                 <td><?php echo $transaksi->total_bayar ?></td>

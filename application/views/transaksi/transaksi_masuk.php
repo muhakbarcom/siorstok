@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-3 text-right">
                         <form action="<?php echo site_url('transaksi/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
-                            <div class="input-group">
+                            <!-- <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
                                     <?php
@@ -36,7 +36,7 @@
                                     ?>
                                     <button class="btn btn-primary" type="submit">Search</button>
                                 </span>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

@@ -150,7 +150,7 @@ class Konsumen extends CI_Controller
         $total_bayar = $this->cart->total();
 
         $data = array(
-            'jumlah_item' => $total_item,
+            'qty' => $total_item,
             'nama_konsumen' => $atas_nama,
             'tanggal_transaksi' => date('Y-m-d H:i:s'),
             'total_bayar' => $total_bayar,
@@ -166,7 +166,7 @@ class Konsumen extends CI_Controller
             $data = array(
                 'id_transaksi' => $id_trx,
                 'id_menu' => $items['id'],
-                'jumlah_item' => $items['qty'],
+                'qty' => $items['qty'],
                 'total_bayar' => $items['subtotal'],
                 'tanggal_transaksi' => date('Y-m-d H:i:s'),
                 'catatan' => $this->input->post($i . 'catatan')

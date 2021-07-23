@@ -6,7 +6,7 @@
                 <!-- <th>Gambar</th> -->
                 <th>No</th>
                 <th>Nama Menu</th>
-                <th>Item</th>
+                <th>Qty</th>
                 <th>Catatan</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <tr>
                     <td><?= $i; ?></td>
                     <td><?= $k->nama_menu; ?></td>
-                    <td><?= $k->jumlah_item; ?></td>
+                    <td><?= $k->qty; ?></td>
                     <td><?= $k->catatan; ?></td>
                     <!-- <td><input type="text" class="form-control" name="<?php echo $i . 'catatan'; ?>"></td> -->
                 </tr>

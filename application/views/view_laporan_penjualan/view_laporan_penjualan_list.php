@@ -1,3 +1,4 @@
+<?php $total_pendapatan = 0; ?>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -24,9 +25,24 @@
                     <div class="col-md-1 text-right">
                     </div>
                     <div class="col-md-3 text-right">
-                        <?php echo anchor(site_url('view_laporan_penjualan/printdoc'), '<i class="fa fa-print"></i> Print Preview', 'class="btn bg-maroon"'); ?>
+                        <form action="<?php echo site_url('view_laporan_penjualan/printdoc_filter'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                            <?php if ($sampai) : ?>
+                                <input type="hidden" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php endif ?>
+                            <?php if ($dari) : ?>
+                                <input type="hidden" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php endif ?>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-print"></i>Print</button>
+                        </form>
                         <?php echo anchor(site_url('view_laporan_penjualan/excel'), '<i class="fa fa-file-excel"></i> Excel', 'class="btn btn-success"'); ?>
-                        <?php echo anchor(site_url('view_laporan_penjualan/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?><form action="<?php echo site_url('view_laporan_penjualan/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                        <?php echo anchor(site_url('view_laporan_penjualan/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?>
+                        <form action="<?php echo site_url('view_laporan_penjualan/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                            <?php if ($sampai) : ?>
+                                <input type="hidden" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php endif ?>
+                            <?php if ($dari) : ?>
+                                <input type="hidden" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php endif ?>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
@@ -48,12 +64,20 @@
                         <div class="col input-group">
                             <!-- <label><b>Filter :</b></label> -->
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
-                            <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal">
+                            <?php if ($dari) : ?>
+                                <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php else : ?>
+                                <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal">
+                            <?php endif ?>
                         </div>
                         <div class="col input-group">
                             <span class="input-group-addon" id="sizing-addon1">
                                 <i class="fas fa-chevron-right"></i></span>
-                            <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal">
+                            <?php if ($sampai) : ?>
+                                <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php else : ?>
+                                <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal">
+                            <?php endif ?>
                         </div>
                         <div class="col input-group">
                             <button type="submit" class="btn btn-primary"> <i class="fas fa-check-circle"></i> Submit</button>
@@ -68,6 +92,7 @@
                             <th>Tanggal Transaksi</th>
                             <th>Kode Nota</th>
                             <th>Nama Konsumen</th>
+                            <th>Jumlah Item</th>
                             <th>Qty</th>
                             <th>Total Bayar</th>
                             <?php $total_keseluruhan = 0; ?>
@@ -81,8 +106,10 @@
                                 <td><?php echo tanggal_transaksi($view_laporan_penjualan->tanggal_transaksi) ?></td>
                                 <td><?php echo $view_laporan_penjualan->kode_nota ?></td>
                                 <td><?php echo $view_laporan_penjualan->nama_konsumen ?></td>
-                                <td><?php echo $view_laporan_penjualan->jumlah_item ?></td>
+                                <td><?php echo $view_laporan_penjualan->jumlah_items ?></td>
+                                <td><?php echo $view_laporan_penjualan->qty ?></td>
                                 <td><?php echo rupiah($view_laporan_penjualan->total_bayar) ?></td>
+
 
                             </tr>
                         <?php
@@ -94,7 +121,10 @@
                             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
                         </div>
                         <div class="col-md-3">
-                            Total Keseluruhan : <?= rupiah($total_keseluruhan); ?>
+                            <?php foreach ($view_laporan_penjualan_data_x as $vlx) {
+                                $total_pendapatan = $total_pendapatan + $vlx->total_bayar;
+                            } ?>
+                            Total Keseluruhan : <?= rupiah($total_pendapatan); ?>
                         </div>
                     </div>
                 </form>

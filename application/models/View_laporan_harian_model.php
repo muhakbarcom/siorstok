@@ -34,7 +34,7 @@ class View_laporan_harian_model extends CI_Model
     {
         //     $this->db->like('', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('jumlah_item_terjual', $q);
+        // $this->db->or_like('qty_terjual', $q);
         // $this->db->or_like('total_pendapatan', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
@@ -46,9 +46,18 @@ class View_laporan_harian_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         //     $this->db->like('', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('jumlah_item_terjual', $q);
+        // $this->db->or_like('qty_terjual', $q);
         // $this->db->or_like('total_pendapatan', $q);
         $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+    function get_limit_data_x($q = NULL)
+    {
+        $this->db->order_by($this->id, $this->order);
+        //     $this->db->like('', $q);
+        // $this->db->or_like('tanggal_transaksi', $q);
+        // $this->db->or_like('qty_terjual', $q);
+        // $this->db->or_like('total_pendapatan', $q);
         return $this->db->get($this->table)->result();
     }
 
@@ -56,7 +65,7 @@ class View_laporan_harian_model extends CI_Model
     {
         //     $this->db->like('', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('jumlah_item_terjual', $q);
+        // $this->db->or_like('qty_terjual', $q);
         // $this->db->or_like('total_pendapatan', $q);
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
@@ -70,11 +79,23 @@ class View_laporan_harian_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         //     $this->db->like('', $q);
         // $this->db->or_like('tanggal_transaksi', $q);
-        // $this->db->or_like('jumlah_item_terjual', $q);
+        // $this->db->or_like('qty_terjual', $q);
         // $this->db->or_like('total_pendapatan', $q);
         $this->db->where('tanggal_transaksi >=', $dari);
         $this->db->where('tanggal_transaksi <=', $sampai);
         $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
+    function laporan_harian_x($q = NULL, $dari, $sampai)
+    {
+        $this->db->order_by($this->id, $this->order);
+        //     $this->db->like('', $q);
+        // $this->db->or_like('tanggal_transaksi', $q);
+        // $this->db->or_like('qty_terjual', $q);
+        // $this->db->or_like('total_pendapatan', $q);
+        $this->db->where('tanggal_transaksi >=', $dari);
+        $this->db->where('tanggal_transaksi <=', $sampai);
         return $this->db->get($this->table)->result();
     }
 

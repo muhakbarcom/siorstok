@@ -21,7 +21,7 @@
                 <tr>
                     <td><?= $i; ?></td>
                     <td><?= $k->nama_menu; ?></td>
-                    <td><?= $k->jumlah_item; ?></td>
+                    <td><?= $k->qty; ?></td>
                     <td><?= rupiah($k->harga_menu); ?></td>
                     <td><?= rupiah($k->total_bayar); ?></td>
                     <td><?= $k->catatan; ?></td>

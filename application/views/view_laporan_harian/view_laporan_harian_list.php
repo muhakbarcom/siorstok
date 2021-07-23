@@ -24,10 +24,18 @@
                     <div class="col-md-1 text-right">
                     </div>
                     <div class="col-md-3 text-right">
-                        <?php echo anchor(site_url('View_laporan_harian/printdoc'), '<i class="fa fa-print"></i> Print Preview', 'class="btn bg-maroon"'); ?>
+                        <form action="<?php echo site_url('view_laporan_harian/printdoc_filter'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                            <?php if ($sampai) : ?>
+                                <input type="hidden" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php endif ?>
+                            <?php if ($dari) : ?>
+                                <input type="hidden" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php endif ?>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-print"></i>Print</button>
+                        </form>
                         <?php echo anchor(site_url('View_laporan_harian/excel'), '<i class="fa fa-file-excel"></i> Excel', 'class="btn btn-success"'); ?>
                         <?php echo anchor(site_url('View_laporan_harian/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?><form action="<?php echo site_url('View_laporan_harian/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
-                            <div class="input-group">
+                            <!-- <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
                                     <?php
@@ -39,7 +47,7 @@
                                     ?>
                                     <button class="btn btn-primary" type="submit">Search</button>
                                 </span>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>
@@ -66,7 +74,8 @@
                             <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
                             <th>No</th>
                             <th>Tanggal Transaksi</th>
-                            <th>Jumlah Qty Item Terjual</th>
+                            <th>Jumlah Item Terjual</th>
+                            <th>Jumlah Qty Terjual</th>
                             <th>Total Pendapatan</th>
                             <?php $total_keseluruhan = 0; ?>
                             <!-- <th>Action</th> -->
@@ -77,7 +86,8 @@
                             <tr>
                                 <td width="80px"><?php echo ++$start ?></td>
                                 <td><?php echo tanggal_transaksi($view_laporan_harian->tanggal_transaksi) ?></td>
-                                <td><?php echo $view_laporan_harian->jumlah_item_terjual ?></td>
+                                <td><?php echo $view_laporan_harian->jumlah_items ?></td>
+                                <td><?php echo $view_laporan_harian->qty_terjual ?></td>
                                 <td><?php echo rupiah($view_laporan_harian->total_pendapatan) ?></td>
                             </tr>
                         <?php

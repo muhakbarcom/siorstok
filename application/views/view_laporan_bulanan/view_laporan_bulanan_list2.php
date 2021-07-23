@@ -64,7 +64,7 @@
                 
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $view_laporan_bulanan->tanggal_transaksi ?></td>
-			<td><?php echo $view_laporan_bulanan->jumlah_item_terjual ?></td>
+			<td><?php echo $view_laporan_bulanan->qty_terjual ?></td>
 			<td><?php echo $view_laporan_bulanan->total_pendapatan ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 

@@ -60,7 +60,7 @@ class Transaksi extends CI_Controller
         if ($row) {
             $data = array(
                 'id_transaksi' => $row->id_transaksi,
-                'jumlah_item' => $row->jumlah_item,
+                'qty' => $row->qty,
                 'nama_konsumen' => $row->nama_konsumen,
                 'tanggal_transaksi' => $row->tanggal_transaksi,
                 'total_bayar' => $row->total_bayar,
@@ -88,7 +88,7 @@ class Transaksi extends CI_Controller
             'button' => 'Create',
             'action' => site_url('transaksi/create_action'),
             'id_transaksi' => set_value('id_transaksi'),
-            'jumlah_item' => set_value('jumlah_item'),
+            'qty' => set_value('qty'),
             'nama_konsumen' => set_value('nama_konsumen'),
             'tanggal_transaksi' => set_value('tanggal_transaksi'),
             'total_bayar' => set_value('total_bayar'),
@@ -114,7 +114,7 @@ class Transaksi extends CI_Controller
             $this->create();
         } else {
             $data = array(
-                'jumlah_item' => $this->input->post('jumlah_item', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
                 'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
                 'total_bayar' => $this->input->post('total_bayar', TRUE),
@@ -138,7 +138,7 @@ class Transaksi extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('transaksi/update_action'),
                 'id_transaksi' => set_value('id_transaksi', $row->id_transaksi),
-                'jumlah_item' => set_value('jumlah_item', $row->jumlah_item),
+                'qty' => set_value('qty', $row->qty),
                 'nama_konsumen' => set_value('nama_konsumen', $row->nama_konsumen),
                 'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
                 'total_bayar' => set_value('total_bayar', $row->total_bayar),
@@ -168,7 +168,7 @@ class Transaksi extends CI_Controller
             $this->update($this->input->post('id_transaksi', TRUE));
         } else {
             $data = array(
-                'jumlah_item' => $this->input->post('jumlah_item', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
                 'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
                 'total_bayar' => $this->input->post('total_bayar', TRUE),
@@ -210,7 +210,7 @@ class Transaksi extends CI_Controller
 
     public function _rules()
     {
-        $this->form_validation->set_rules('jumlah_item', 'jumlah item', 'trim|required');
+        $this->form_validation->set_rules('qty', 'jumlah item', 'trim|required');
         $this->form_validation->set_rules('nama_konsumen', 'nama konsumen', 'trim|required');
         $this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
         $this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
@@ -272,7 +272,7 @@ class Transaksi extends CI_Controller
     public function tampil_trx($id)
     {
         // $row =  $this->Detail_transaksi_model->get_by_trx($id);
-        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.jumlah_item, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
+        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.qty, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
         $atas_nama = $this->db->query("select nama_konsumen from transaksi where id_transaksi=$id")->row();
         $data['atas_nama'] = $atas_nama->nama_konsumen;
         $total_bayar = $this->db->query("select total_bayar from transaksi where id_transaksi=$id")->row();
@@ -294,7 +294,7 @@ class Transaksi extends CI_Controller
     {
         $data['id_trx'] = $id;
         // $row =  $this->Detail_transaksi_model->get_by_trx($id);
-        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.jumlah_item, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
+        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.qty, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
         $atas_nama = $this->db->query("select nama_konsumen from transaksi where id_transaksi=$id")->row();
         $data['atas_nama'] = $atas_nama->nama_konsumen;
         $total_bayar = $this->db->query("select total_bayar from transaksi where id_transaksi=$id")->row();
@@ -338,7 +338,7 @@ class Transaksi extends CI_Controller
     {
         $data['id_trx'] = $id;
         // $row =  $this->Detail_transaksi_model->get_by_trx($id);
-        $data['cetak'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.jumlah_item, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
+        $data['cetak'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.qty, menu_food_and_beverage.harga_menu, detail_transaksi.total_bayar from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
         $atas_nama = $this->db->query("select nama_konsumen from transaksi where id_transaksi=$id")->row();
         $data['atas_nama'] = $atas_nama->nama_konsumen;
         $tanggal_trx = $this->db->query("select tanggal_transaksi from transaksi where id_transaksi=$id")->row();
@@ -414,7 +414,7 @@ class Transaksi extends CI_Controller
     public function tampil_koki($id)
     {
         // $row =  $this->Detail_transaksi_model->get_by_trx($id);
-        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.jumlah_item, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
+        $data['konfirmasi'] = $this->db->query("select menu_food_and_beverage.nama_menu, detail_transaksi.qty, detail_transaksi.catatan from detail_transaksi join menu_food_and_beverage on detail_transaksi.id_menu=menu_food_and_beverage.id_menu where detail_transaksi.id_transaksi=$id")->result();
         $atas_nama = $this->db->query("select nama_konsumen from transaksi where id_transaksi=$id")->row();
         $data['atas_nama'] = $atas_nama->nama_konsumen;
         $data['id_trx'] = $id;
@@ -464,7 +464,7 @@ class Transaksi extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Transaksi_model->total_rows($q);
+        $config['total_rows'] = $this->Transaksi_model->total_rows_koki_selesai($q);
         $transaksi = $this->Transaksi_model->get_limit_data_koki_selesai($config['per_page'], $start, $q);
 
         $this->load->library('pagination');

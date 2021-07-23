@@ -42,7 +42,7 @@ class Detail_transaksi_model extends CI_Model
         $this->db->like('id_detail_transaksi', $q);
         $this->db->or_like('id_transaksi', $q);
         $this->db->or_like('id_menu', $q);
-        $this->db->or_like('jumlah_item', $q);
+        $this->db->or_like('qty', $q);
         $this->db->or_like('total_bayar', $q);
         $this->db->or_like('tanggal_transaksi', $q);
         $this->db->or_like('catatan', $q);
@@ -57,7 +57,7 @@ class Detail_transaksi_model extends CI_Model
         $this->db->like('id_detail_transaksi', $q);
         $this->db->or_like('id_transaksi', $q);
         $this->db->or_like('id_menu', $q);
-        $this->db->or_like('jumlah_item', $q);
+        $this->db->or_like('qty', $q);
         $this->db->or_like('total_bayar', $q);
         $this->db->or_like('tanggal_transaksi', $q);
         $this->db->or_like('catatan', $q);

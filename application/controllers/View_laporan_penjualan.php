@@ -36,21 +36,44 @@ class View_laporan_penjualan extends CI_Controller
         $dari = $this->input->post('dari');
         $sampai = $this->input->post('sampai');
 
-        if ($dari) {
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+                $q = null;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
+
             $config['total_rows'] = $this->View_laporan_penjualan_model->laporan_penjualan_total($q, $dari, $sampai);
+
             $view_laporan_penjualan = $this->View_laporan_penjualan_model->laporan_penjualan($config['per_page'], $start, $q, $dari, $sampai);
-            // $total_keseluruhan = $this->View_laporan_penjualan_model->get_total_keseluruhan_2($config['per_page'], $start, $q, $dari, $sampai);
+            $view_laporan_penjualan_x = $this->View_laporan_penjualan_model->laporan_penjualan_x($q, $dari, $sampai);
+            // $total_pendapatan = $this->View_laporan_penjualan_model->laporan_penjualan_tp($q, $dari, $sampai);
+            // $total_pendapatan = $total_pendapatan->total_bayar;
         } else {
+
             $config['total_rows'] = $this->View_laporan_penjualan_model->total_rows($q);
             $view_laporan_penjualan = $this->View_laporan_penjualan_model->get_limit_data($config['per_page'], $start, $q);
-            // $total_keseluruhan = $this->View_laporan_penjualan_model->get_total_keseluruhan($config['per_page'], $start, $q);
+            $view_laporan_penjualan_x = $this->View_laporan_penjualan_model->get_limit_data_x($q);
+            // $total_pendapatan = $this->View_laporan_penjualan_model->get_limit_data_tp($q);
+            // $total_pendapatan = $total_pendapatan->total_bayar;
         }
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
+            'dari' => $dari,
+            'sampai' => $sampai,
+            // 'total_pendapatan' => $total_pendapatan,
             'view_laporan_penjualan_data' => $view_laporan_penjualan,
+            'view_laporan_penjualan_data_x' => $view_laporan_penjualan_x,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             // 'total_keseluruhan' => $total_keseluruhan,
@@ -75,7 +98,7 @@ class View_laporan_penjualan extends CI_Controller
                 'tanggal_transaksi' => $row->tanggal_transaksi,
                 'kode_nota' => $row->kode_nota,
                 'nama_konsumen' => $row->nama_konsumen,
-                'jumlah_item' => $row->jumlah_item,
+                'qty' => $row->qty,
                 'total_bayar' => $row->total_bayar,
             );
             $data['title'] = 'View Laporan Penjualan';
@@ -100,7 +123,7 @@ class View_laporan_penjualan extends CI_Controller
             'tanggal_transaksi' => set_value('tanggal_transaksi'),
             'kode_nota' => set_value('kode_nota'),
             'nama_konsumen' => set_value('nama_konsumen'),
-            'jumlah_item' => set_value('jumlah_item'),
+            'qty' => set_value('qty'),
             'total_bayar' => set_value('total_bayar'),
         );
         $data['title'] = 'View Laporan Penjualan';
@@ -124,7 +147,7 @@ class View_laporan_penjualan extends CI_Controller
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
                 'kode_nota' => $this->input->post('kode_nota', TRUE),
                 'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
-                'jumlah_item' => $this->input->post('jumlah_item', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
                 'total_bayar' => $this->input->post('total_bayar', TRUE),
             );
 
@@ -145,7 +168,7 @@ class View_laporan_penjualan extends CI_Controller
                 'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
                 'kode_nota' => set_value('kode_nota', $row->kode_nota),
                 'nama_konsumen' => set_value('nama_konsumen', $row->nama_konsumen),
-                'jumlah_item' => set_value('jumlah_item', $row->jumlah_item),
+                'qty' => set_value('qty', $row->qty),
                 'total_bayar' => set_value('total_bayar', $row->total_bayar),
             );
             $data['title'] = 'View Laporan Penjualan';
@@ -173,7 +196,7 @@ class View_laporan_penjualan extends CI_Controller
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
                 'kode_nota' => $this->input->post('kode_nota', TRUE),
                 'nama_konsumen' => $this->input->post('nama_konsumen', TRUE),
-                'jumlah_item' => $this->input->post('jumlah_item', TRUE),
+                'qty' => $this->input->post('qty', TRUE),
                 'total_bayar' => $this->input->post('total_bayar', TRUE),
             );
 
@@ -213,7 +236,7 @@ class View_laporan_penjualan extends CI_Controller
         $this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
         $this->form_validation->set_rules('kode_nota', 'kode nota', 'trim|required');
         $this->form_validation->set_rules('nama_konsumen', 'nama konsumen', 'trim|required');
-        $this->form_validation->set_rules('jumlah_item', 'jumlah item', 'trim|required');
+        $this->form_validation->set_rules('qty', 'jumlah item', 'trim|required');
         $this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
 
         $this->form_validation->set_rules('', '', 'trim');
@@ -256,7 +279,7 @@ class View_laporan_penjualan extends CI_Controller
             xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_transaksi);
             xlsWriteLabel($tablebody, $kolombody++, $data->kode_nota);
             xlsWriteLabel($tablebody, $kolombody++, $data->nama_konsumen);
-            xlsWriteNumber($tablebody, $kolombody++, $data->jumlah_item);
+            xlsWriteNumber($tablebody, $kolombody++, $data->qty);
             xlsWriteNumber($tablebody, $kolombody++, $data->total_bayar);
 
             $tablebody++;
@@ -284,6 +307,37 @@ class View_laporan_penjualan extends CI_Controller
     {
         $data = array(
             'view_laporan_penjualan_data' => $this->View_laporan_penjualan_model->get_all(),
+            'start' => 0
+        );
+        $this->load->view('view_laporan_penjualan/view_laporan_penjualan_print', $data);
+    }
+    public function printdoc_filter()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+                $q = null;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
+
+            $view_laporan_penjualan_x = $this->View_laporan_penjualan_model->laporan_penjualan_x($q, $dari, $sampai);
+        } else {
+            $view_laporan_penjualan_x = $this->View_laporan_penjualan_model->get_limit_data_x($q);
+        }
+
+        $data = array(
+            'view_laporan_penjualan_data' => $view_laporan_penjualan_x,
             'start' => 0
         );
         $this->load->view('view_laporan_penjualan/view_laporan_penjualan_print', $data);

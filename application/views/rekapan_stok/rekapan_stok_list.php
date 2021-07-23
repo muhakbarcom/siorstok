@@ -24,9 +24,24 @@
                     <div class="col-md-1 text-right">
                     </div>
                     <div class="col-md-3 text-right">
-                        <?php echo anchor(site_url('rekapan_stok/printdoc'), '<i class="fa fa-print"></i> Print Preview', 'class="btn bg-maroon"'); ?>
+                        <form action="<?php echo site_url('rekapan_stok/printdoc_filter'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                            <?php if ($sampai) : ?>
+                                <input type="hidden" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php endif ?>
+                            <?php if ($dari) : ?>
+                                <input type="hidden" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php endif ?>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-print"></i>Print</button>
+                        </form>
                         <?php echo anchor(site_url('rekapan_stok/excel'), '<i class="fa fa-file-excel"></i> Excel', 'class="btn btn-success"'); ?>
-                        <?php echo anchor(site_url('rekapan_stok/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?><form action="<?php echo site_url('rekapan_stok/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                        <?php echo anchor(site_url('rekapan_stok/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?>
+                        <form action="<?php echo site_url('rekapan_stok/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+                            <?php if ($sampai) : ?>
+                                <input type="hidden" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php endif ?>
+                            <?php if ($dari) : ?>
+                                <input type="hidden" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php endif ?>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                 <span class="input-group-btn">
@@ -48,12 +63,20 @@
                         <div class="col input-group">
                             <!-- <label><b>Filter :</b></label> -->
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
-                            <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal">
+                            <?php if ($dari) : ?>
+                                <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal" value="<?= $dari; ?>">
+                            <?php else : ?>
+                                <input type="text" class="form-control formdate" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal">
+                            <?php endif ?>
                         </div>
                         <div class="col input-group">
                             <span class="input-group-addon" id="sizing-addon1">
                                 <i class="fas fa-chevron-right"></i></span>
-                            <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal">
+                            <?php if ($sampai) : ?>
+                                <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal" value="<?= $sampai; ?>">
+                            <?php else : ?>
+                                <input type="text" class="form-control formdate" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal">
+                            <?php endif ?>
                         </div>
                         <div class="col input-group">
                             <button type="submit" class="btn btn-primary"> <i class="fas fa-check-circle"></i> Submit</button>
@@ -66,9 +89,9 @@
                             <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
                             <th>No</th>
                             <th>Nama Menu</th>
-                            <th>Tanggal Penjualan</th>
+                            <!-- <th>Tanggal Penjualan</th> -->
                             <th>Stok Terjual</th>
-                            <th>Stok Sisa</th>
+                            <!-- <th>Stok Sisa</th> -->
                             <!-- <th>Action</th> -->
                         </tr><?php
                                 foreach ($rekapan_stok_data as $rekapan_stok) {
@@ -80,9 +103,9 @@
                                 <td width="80px"><?php echo ++$start ?></td>
 
                                 <td><?php echo $rekapan_stok->nama_menu ?></td>
-                                <td><?php echo $rekapan_stok->tanggal_penjualan ?></td>
+                                <!-- <td><?php echo $rekapan_stok->tanggal_penjualan ?></td> -->
                                 <td><?php echo $rekapan_stok->stok_terjual ?></td>
-                                <td><?php echo $rekapan_stok->stok_sisa ?></td>
+                                <!-- <td><?php echo $rekapan_stok->stok_sisa ?></td> -->
 
                             </tr>
                         <?php

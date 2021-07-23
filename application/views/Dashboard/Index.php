@@ -145,7 +145,7 @@
       <div class="nav-tabs-custom">
         <!-- Tabs within a box -->
         <ul class="nav nav-tabs pull-right">
-          <li class="pull-left header"><i class="fa fa-inbox"></i> Statistik Pendapatan Bulanan</li>
+          <li class="pull-left header"><i class="fa fa-inbox"></i> Statistik Pendapatan Kotor Bulanan</li>
         </ul>
         <div class="tab-content no-padding">
           <canvas id="myChart" width="200" height="100"></canvas>
@@ -156,7 +156,7 @@
               data: {
                 labels: <?= json_encode($y); ?>,
                 datasets: [{
-                  label: '# Penjualan',
+                  label: '# Pendapatan',
                   data: <?= json_encode($x); ?>,
                   backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

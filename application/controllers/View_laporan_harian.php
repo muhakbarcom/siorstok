@@ -36,7 +36,19 @@ class View_laporan_harian extends CI_Controller
         $dari = $this->input->post('dari');
         $sampai = $this->input->post('sampai');
 
-        if ($dari) {
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+                $q = null;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
             $config['total_rows'] = $this->View_laporan_harian_model->laporan_harian_total($q, $dari, $sampai);
             $view_laporan_harian = $this->View_laporan_harian_model->laporan_harian($config['per_page'], $start, $q, $dari, $sampai);
         } else {
@@ -48,6 +60,8 @@ class View_laporan_harian extends CI_Controller
         $this->pagination->initialize($config);
 
         $data = array(
+            'dari' => $dari,
+            'sampai' => $sampai,
             'view_laporan_harian_data' => $view_laporan_harian,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
@@ -70,7 +84,7 @@ class View_laporan_harian extends CI_Controller
         if ($row) {
             $data = array(
                 'tanggal_transaksi' => $row->tanggal_transaksi,
-                'jumlah_item_terjual' => $row->jumlah_item_terjual,
+                'qty_terjual' => $row->qty_terjual,
                 'total_pendapatan' => $row->total_pendapatan,
             );
             $data['title'] = 'View Laporan Harian';
@@ -93,7 +107,7 @@ class View_laporan_harian extends CI_Controller
             'button' => 'Create',
             'action' => site_url('view_laporan_harian/create_action'),
             'tanggal_transaksi' => set_value('tanggal_transaksi'),
-            'jumlah_item_terjual' => set_value('jumlah_item_terjual'),
+            'qty_terjual' => set_value('qty_terjual'),
             'total_pendapatan' => set_value('total_pendapatan'),
         );
         $data['title'] = 'View Laporan Harian';
@@ -115,7 +129,7 @@ class View_laporan_harian extends CI_Controller
         } else {
             $data = array(
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
-                'jumlah_item_terjual' => $this->input->post('jumlah_item_terjual', TRUE),
+                'qty_terjual' => $this->input->post('qty_terjual', TRUE),
                 'total_pendapatan' => $this->input->post('total_pendapatan', TRUE),
             );
 
@@ -134,7 +148,7 @@ class View_laporan_harian extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('view_laporan_harian/update_action'),
                 'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
-                'jumlah_item_terjual' => set_value('jumlah_item_terjual', $row->jumlah_item_terjual),
+                'qty_terjual' => set_value('qty_terjual', $row->qty_terjual),
                 'total_pendapatan' => set_value('total_pendapatan', $row->total_pendapatan),
             );
             $data['title'] = 'View Laporan Harian';
@@ -160,7 +174,7 @@ class View_laporan_harian extends CI_Controller
         } else {
             $data = array(
                 'tanggal_transaksi' => $this->input->post('tanggal_transaksi', TRUE),
-                'jumlah_item_terjual' => $this->input->post('jumlah_item_terjual', TRUE),
+                'qty_terjual' => $this->input->post('qty_terjual', TRUE),
                 'total_pendapatan' => $this->input->post('total_pendapatan', TRUE),
             );
 
@@ -198,7 +212,7 @@ class View_laporan_harian extends CI_Controller
     public function _rules()
     {
         $this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
-        $this->form_validation->set_rules('jumlah_item_terjual', 'jumlah item terjual', 'trim|required|numeric');
+        $this->form_validation->set_rules('qty_terjual', 'jumlah item terjual', 'trim|required|numeric');
         $this->form_validation->set_rules('total_pendapatan', 'total pendapatan', 'trim|required|numeric');
 
         $this->form_validation->set_rules('', '', 'trim');
@@ -237,7 +251,7 @@ class View_laporan_harian extends CI_Controller
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
             xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_transaksi);
-            xlsWriteNumber($tablebody, $kolombody++, $data->jumlah_item_terjual);
+            xlsWriteNumber($tablebody, $kolombody++, $data->qty_terjual);
             xlsWriteNumber($tablebody, $kolombody++, $data->total_pendapatan);
 
             $tablebody++;
@@ -265,6 +279,38 @@ class View_laporan_harian extends CI_Controller
     {
         $data = array(
             'view_laporan_harian_data' => $this->View_laporan_harian_model->get_all(),
+            'start' => 0
+        );
+        $this->load->view('view_laporan_harian/view_laporan_harian_print', $data);
+    }
+
+    public function printdoc_filter()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+                $q = null;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
+
+            $view_laporan_harian = $this->View_laporan_harian_model->laporan_harian_x($q, $dari, $sampai);
+        } else {
+            $view_laporan_harian = $this->View_laporan_harian_model->get_limit_data_x($q);
+        }
+
+        $data = array(
+            'view_laporan_harian_data' => $view_laporan_harian,
             'start' => 0
         );
         $this->load->view('view_laporan_harian/view_laporan_harian_print', $data);

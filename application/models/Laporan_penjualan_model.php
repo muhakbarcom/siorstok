@@ -36,7 +36,7 @@ class Laporan_penjualan_model extends CI_Model
         $this->db->or_like('tanggal_transaksi', $q);
         $this->db->or_like('kode_nota', $q);
         $this->db->or_like('nama_konsumen', $q);
-        $this->db->or_like('jumlah_item', $q);
+        $this->db->or_like('qty', $q);
         $this->db->or_like('total_bayar', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
@@ -50,7 +50,7 @@ class Laporan_penjualan_model extends CI_Model
         // $this->db->or_like('tanggal_transaksi', $q);
         // $this->db->or_like('kode_nota', $q);
         // $this->db->or_like('nama_konsumen', $q);
-        // $this->db->or_like('jumlah_item', $q);
+        // $this->db->or_like('qty', $q);
         // $this->db->or_like('total_bayar', $q);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

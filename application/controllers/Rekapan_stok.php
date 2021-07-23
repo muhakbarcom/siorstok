@@ -37,7 +37,19 @@ class Rekapan_stok extends CI_Controller
         $dari = $this->input->post('dari');
         $sampai = $this->input->post('sampai');
 
-        if ($dari) {
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
+
             $config['total_rows'] = $this->Rekapan_stok_model->laporan_stok_total($q, $dari, $sampai);
             $view_laporan_penjualan = $this->Rekapan_stok_model->laporan_stok($config['per_page'], $start, $q, $dari, $sampai);
         } else {
@@ -53,7 +65,10 @@ class Rekapan_stok extends CI_Controller
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
+            'dari' => $dari,
+            'sampai' => $sampai,
             'start' => $start,
+
         );
         $data['title'] = 'Laporan';
         $data['subtitle'] = 'Laporan Stok Menu';
@@ -277,6 +292,37 @@ class Rekapan_stok extends CI_Controller
     {
         $data = array(
             'rekapan_stok_data' => $this->Rekapan_stok_model->get_all(),
+            'start' => 0
+        );
+        $this->load->view('rekapan_stok/rekapan_stok_print', $data);
+    }
+
+    public function printdoc_filter()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        $g_dari = $this->input->get('dari');
+        $g_sampai = $this->input->get('sampai');
+
+        if ($dari or $g_dari) {
+
+            if ($dari) {
+                $dari = $dari;
+                $sampai = $sampai;
+                $q = null;
+            } else {
+                $dari = $g_dari;
+                $sampai = $g_sampai;
+            }
+
+            $view_laporan_penjualan = $this->Rekapan_stok_model->laporan_stok_x($q, $dari, $sampai);
+        } else {
+            $view_laporan_penjualan = $this->Rekapan_stok_model->get_limit_data_x($q);
+        }
+        $data = array(
+            'rekapan_stok_data' => $view_laporan_penjualan,
             'start' => 0
         );
         $this->load->view('rekapan_stok/rekapan_stok_print', $data);
