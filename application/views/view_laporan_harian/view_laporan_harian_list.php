@@ -1,3 +1,4 @@
+<?php $total_pendapatan = 0; ?>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -99,7 +100,11 @@
                             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
                         </div>
                         <div class="col-md-3">
-                            Total Keseluruhan : <?= rupiah($total_keseluruhan); ?>
+                            <!-- <?php echo  $_SESSION['jumlah']; ?> -->
+                            <?php foreach ($view_laporan_harian_data_x as $vlx) {
+                                $total_pendapatan = $total_pendapatan + $vlx->total_pendapatan;
+                            } ?>
+                            Total Keseluruhan : <?= rupiah($total_pendapatan); ?>
                         </div>
                     </div>
                 </form>

@@ -51,9 +51,11 @@ class View_laporan_bulanan extends CI_Controller
             }
             $config['total_rows'] = $this->View_laporan_bulanan_model->laporan_bulanan_total($q, $dari, $sampai);
             $view_laporan_bulanan = $this->View_laporan_bulanan_model->laporan_bulanan($config['per_page'], $start, $q, $dari, $sampai);
+            $view_laporan_bulanan_x = $this->View_laporan_bulanan_model->laporan_bulanan_x($q, $dari, $sampai);
         } else {
             $config['total_rows'] = $this->View_laporan_bulanan_model->total_rows($q);
             $view_laporan_bulanan = $this->View_laporan_bulanan_model->get_limit_data($config['per_page'], $start, $q);
+            $view_laporan_bulanan_x = $this->View_laporan_bulanan_model->get_limit_data_x($q);
         }
 
         $this->load->library('pagination');
@@ -63,6 +65,7 @@ class View_laporan_bulanan extends CI_Controller
             'dari' => $dari,
             'sampai' => $sampai,
             'view_laporan_bulanan_data' => $view_laporan_bulanan,
+            'view_laporan_bulanan_data_x' => $view_laporan_bulanan_x,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],

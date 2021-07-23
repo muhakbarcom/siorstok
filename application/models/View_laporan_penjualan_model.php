@@ -119,7 +119,6 @@ class View_laporan_penjualan_model extends CI_Model
     }
     function laporan_penjualan_x($q = NULL, $dari, $sampai)
     {
-
         // $this->db->select("tanggal_transaksi,kode_nota,nama_konsumen,jumlah_items,qty,total_bayar,sum(total_bayar) as total_pendapatan");
         $this->db->like('nama_konsumen', $q);
         $this->db->where('tanggal_transaksi >=', $dari);

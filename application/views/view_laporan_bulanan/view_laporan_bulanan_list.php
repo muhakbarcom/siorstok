@@ -1,3 +1,4 @@
+<?php $total_pendapatan = 0; ?>
 <style>
     .ui-datepicker-calendar {
         display: none;
@@ -104,7 +105,10 @@
                             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
                         </div>
                         <div class="col-md-3">
-                            Total Keseluruhan : <?= rupiah($total_keseluruhan); ?>
+                            <?php foreach ($view_laporan_bulanan_data_x as $vlx) {
+                                $total_pendapatan = $total_pendapatan + $vlx->total_pendapatan;
+                            } ?>
+                            Total Keseluruhan : <?= rupiah($total_pendapatan); ?>
                         </div>
                     </div>
                 </form>

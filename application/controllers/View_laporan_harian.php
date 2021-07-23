@@ -51,9 +51,11 @@ class View_laporan_harian extends CI_Controller
             }
             $config['total_rows'] = $this->View_laporan_harian_model->laporan_harian_total($q, $dari, $sampai);
             $view_laporan_harian = $this->View_laporan_harian_model->laporan_harian($config['per_page'], $start, $q, $dari, $sampai);
+            $view_laporan_harian_x = $this->View_laporan_harian_model->laporan_harian_x($q, $dari, $sampai);
         } else {
             $config['total_rows'] = $this->View_laporan_harian_model->total_rows($q);
             $view_laporan_harian = $this->View_laporan_harian_model->get_limit_data($config['per_page'], $start, $q);
+            $view_laporan_harian_x = $this->View_laporan_harian_model->get_limit_data_x($q);
         }
 
         $this->load->library('pagination');
@@ -63,6 +65,7 @@ class View_laporan_harian extends CI_Controller
             'dari' => $dari,
             'sampai' => $sampai,
             'view_laporan_harian_data' => $view_laporan_harian,
+            'view_laporan_harian_data_x' => $view_laporan_harian_x,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
